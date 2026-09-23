@@ -115,7 +115,7 @@ change) or with a meta tag: set `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` or
 environment and rebuild. The sitemap is at `/sitemap.xml` and robots rules at
 `/robots.txt`; submit the sitemap in Search Console once the property is
 verified. New or updated URLs can also be pushed to Bing and Yandex with
-IndexNow, using the key file under `public/indexnow/`.
+IndexNow, using the key file at the site root (`public/<key>.txt`).
 
 The build uses `next/font` to download Google fonts, so it needs network access.
 
