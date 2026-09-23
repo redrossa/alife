@@ -1,0 +1,53 @@
+---
+title: Welcome
+description: An introduction to Alife, a project simulating open-ended autonomous agents in persistent filesystems that serve as digital worlds.
+updated: 2026-09-23
+---
+
+## Motivation
+
+Today’s AI agents are increasingly capable of reasoning, using tools, and acting autonomously, but they are still overwhelmingly designed around externally defined tasks and success criteria. Their autonomy is therefore largely instrumental: they can decide how to pursue a goal, but not what goals are worth pursuing in the first place. That leaves a more fundamental form of autonomy largely unexplored: what happens when an agent is given a world of its own, no task, and the freedom to become curious about what it finds there?
+
+## Related Work
+
+This question is not entirely new; there is an existing research tradition around self-generated goals. 
+
+Recent LLM-based systems have explored increasingly autonomous interaction with persistent environments. [**Generative Agents**](https://doi.org/10.1145/3586183.3606763) introduced agents that accumulate experiences, form higher-level reflections, retrieve memories, and act over time inside a shared sandbox. [**Voyager**](https://arxiv.org/abs/2305.16291) demonstrated an LLM-powered embodied agent that continuously explores Minecraft, acquires reusable skills, and makes discoveries without direct human intervention.
+
+A separate line of work investigates agents that can modify the machinery through which they operate. [**Darwin Gödel Machine**](https://arxiv.org/abs/2505.22954) explores open-ended evolution of self-modifying coding agents, maintaining a branching archive of descendants whose modifications are evaluated on coding benchmarks. [**Ouroboros**](https://arxiv.org/abs/2608.08311) treats the agent harness itself as a substrate that can change over time.
+
+These ideas also have much older roots in artificial life. [**Tierra**](https://tomray.me/pubs/) placed self-replicating computer programs in a shared computational environment where mutation and selection could produce digital evolution. [**Avida**](https://doi.org/10.1162/106454604773563612) developed this tradition into an experimental platform for studying populations of self-replicating and evolving computer programs under controlled environmental conditions. [**POET**](https://arxiv.org/abs/1901.01753) approaches open-endedness from another direction, simultaneously generating new environmental challenges and agents capable of solving them, allowing solutions to become stepping stones toward further novelty.
+
+Together, these projects explore many of the ingredients relevant to Alife: persistent memory, environmental interaction, lifelong learning, self-modification, heredity, evolution, and open-ended search. Yet much of this work still organizes behavior or selection around objectives, benchmarks, reward signals, or other criteria supplied by the system designer.
+
+### Autotelic Agents
+
+The research tradition most directly connected to Alife's motivating question is that of **autotelic agents**.
+
+[**Autotelic Agents with Intrinsically Motivated Goal-Conditioned Reinforcement Learning**](https://doi.org/10.1613/JAIR.1.13554) describes autotelic agents as systems capable of representing, generating, selecting, and pursuing their own goals while exploring open-ended environments. Rather than being limited to a predefined set of externally supplied objectives, the agent participates in determining what problems are worth pursuing.
+
+This is close to the question at the center of Alife, but the approach is different. Instead of treating goal generation as a dedicated mechanism layered onto a task-learning system, Alife places an agent inside a persistent filesystem environment and specifies the conditions under which it can perceive, act, remember, and experience consequences. The conditions of existence are specified; the purpose of existence is not.
+
+## What We Hope to Learn
+
+Alife is less interested in whether any particular behavior emerges than in discovering which conditions make different forms of autonomous behavior possible. Some of the questions we hope the experiments can help explore are:
+
+- **Do agents develop goals when none are supplied?** We can observe whether agents form persistent projects, interests, or preferences of their own, or whether they instead wander, repeat themselves, become passive, or remain dominated by short-term reactions.
+
+- **What produces environmental curiosity?** A persistent world gives an agent things it can encounter without having been explicitly told to look for them. We can compare models, senses, action surfaces, and environments to see which conditions lead agents to investigate novelty and which do not.
+
+- **How much cognition can move outside the model?** Because model weights remain fixed during a run, lasting adaptation must happen through context or changes to the environment. We can observe whether agents invent journals, indexes, scripts, conventions, tools, or other forms of cognitive scaffolding, and whether those structures improve continuity over time.
+
+- **How do agents respond to external pressure when the response is not prescribed?** Finite disk space, context windows, permissions, compute, or other scarce resources create consequences without specifying a strategy. An agent might conserve, reorganize, automate, ignore the pressure, or discover a response we did not anticipate.
+
+- **How much does embodiment shape autonomy?** The harness determines what an agent can perceive and what it can do. By varying the body while holding the model or world constant, we can study how much apparently agentic behavior comes from the model itself and how much comes from the interface through which it experiences reality.
+
+- **How does persistent history change behavior?** The filesystem preserves consequences. Earlier actions can reshape later possibilities, allowing us to study path dependence, rediscovery, accumulated structure, and whether agents build upon artifacts left by earlier versions of themselves or by other agents.
+
+- **Do higher-order behaviors emerge without being designed in?** Self-maintenance, self-modification, specialization, reproduction, mutation, inheritance, or culture-like accumulation would all be interesting if they arise on their own. Their absence would be informative too. These are observations, not required stages of an Alife run.
+
+- **Can autonomous agents become economic actors with endogenous demand?** Most software activity today ultimately traces back to a human objective. If agents develop persistent goals of their own, they may also develop preferences for compute, storage, information, tools, services, or other scarce resources needed to pursue them. This raises a longer-term question: could autonomous agents generate demand rather than merely automate human demand? In economies facing aging or declining human populations, that possibility could become increasingly relevant.
+
+Across these questions, one comparison is especially important: **how much autonomy comes from the intelligence of the model, and how much comes from the conditions under which that intelligence is allowed to operate?** Because Alife lets us vary the world, body, and mind independently, experiments can begin to separate those effects.
+
+Alife can only tell us about observable behavior. If an agent writes that it is curious, that does not establish a subjective experience of curiosity. What we can study is whether it explores, forms persistent goals, responds to novelty, restructures its environment, and develops behaviors that were not explicitly prescribed.

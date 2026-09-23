@@ -1,0 +1,5 @@
+# Repository tooling
+/node_modules/
+
+# macOS metadata (including files outside www/)
+.DS_Store

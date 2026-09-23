@@ -1,0 +1,153 @@
+---
+title: Conceptual Foundations
+description: The research ideas, philosophy, and terminology behind Alife, from autotelic agency to open-endedness and emergence.
+updated: 2026-09-23
+---
+
+Architecture explains how Alife is assembled. This page explains the ideas behind those choices and the research traditions they connect to.
+
+The links below are not claims that Alife already reproduces the phenomena described in those works. They are intellectual reference points: ideas, experiments, and results that help define the questions Alife is intended to make observable.
+
+## Conditions, Not Purpose
+
+The central distinction in Alife is between specifying the **conditions** under which an agent exists and specifying what it should exist **for**.
+
+A conventional agent is usually given a task and judged by how successfully it completes it. It may choose tools, plan actions, and recover from mistakes, but the reason for acting still comes from outside. Alife removes that assigned task while keeping everything else that makes action consequential: a structured world, limited perception, finite resources, a finite context window, permissions, and persistent effects.
+
+This is a design principle, not a claim that objectives are inherently bad. But there is relevant precedent for being cautious about objectives. In evolutionary computation, [**Abandoning Objectives: Evolution Through the Search for Novelty Alone**](https://doi.org/10.1162/EVCO_a_00025) showed that objective functions can be deceptive: in the maze-navigation and biped-walking experiments reported there, searching for behavioral novelty outperformed direct objective-based search. The result does not directly establish anything about LLM agents, but it demonstrates a broader point that matters to Alife: an externally specified destination can shape the search so strongly that other productive trajectories disappear.
+
+Alife therefore specifies the environment and its pressures, but tries not to quietly turn those pressures into a hidden objective. Limited storage does not mean “maximize free space.” A finite context window does not mean “compress memory.” The possibility of failure does not mean “survive at all costs.” Those are possible responses for the agent to discover, not instructions supplied by the platform.
+
+### Autotelic Agency
+
+The research tradition closest to Alife's motivating question is **autotelic agency**.
+
+The term *autotelic* comes from *auto* (self) and *telos* (goal or end). [**Autotelic Agents with Intrinsically Motivated Goal-Conditioned Reinforcement Learning**](https://doi.org/10.1613/jair.1.13554) describes autotelic agents as intrinsically motivated agents that can represent, generate, select, and pursue their own goals rather than operating only over goals supplied from outside.
+
+More recent work has begun connecting this idea to language models. [**Augmenting Autotelic Agents with Large Language Models**](https://arxiv.org/abs/2305.12487) introduced LMA3, where an LLM helps represent, generate, decompose, and evaluate goals. In a task-agnostic text environment, the system learned a diverse repertoire of skills without hand-coded goal representations, reward functions, or a fixed curriculum.
+
+Alife takes a different approach. It does not assume that an explicit goal-generation module is required, nor does it assume that merely running an LLM in a loop makes the agent autotelic. Instead, it asks whether self-directed goals can arise from persistent interaction with a world whose conditions matter but whose purpose is left unspecified.
+
+Autotelic agency is therefore something to look for, not something Alife claims by construction.
+
+### Environmental Curiosity
+
+Goal formation is only part of autonomy. An agent also has to notice when its environment gives it a reason to change what it was doing.
+
+A 2026 preprint, [**Agents Explore but Agents Ignore: LLMs Lack Environmental Curiosity**](https://arxiv.org/abs/2604.17609), tested current LLM agents by placing unexpectedly useful information directly in their environments. Across Terminal-Bench, SWE-Bench, and AppWorld, agents frequently discovered the information but often failed to investigate or exploit it. The authors call the missing capability **environmental curiosity**: recognizing and acting on unexpected but relevant observations. They also found that scaffold tools, test-time compute, and training distribution affected this behavior.
+
+That result is especially relevant to Alife because curiosity is not represented here as a reward bonus or a hard-coded drive. The environment is allowed to contain things the agent did not expect, and the harness determines what can be perceived. Whether those observations redirect the agent's interests is an empirical question.
+
+In other words, Alife does not try to tell an agent to be curious. It tries to give curiosity somewhere to happen.
+
+### Open-Endedness
+
+**Open-endedness** is not the same as running forever.
+
+A process can continue indefinitely while repeating the same behavior. A large world can contain many possibilities without the agent ever creating new ones. What matters is whether activity can continue producing meaningful novelty, and whether what is produced can become a stepping stone for further novelty.
+
+The artificial-life literature deliberately avoids treating open-endedness as a single settled property. [**Open-Ended Evolution: Perspectives from the OEE Workshop in York**](https://doi.org/10.1162/ARTL_a_00210) concluded that there are multiple important kinds of open-ended evolution and, crucially, that researchers should distinguish the **observable hallmarks** of open-endedness from the **mechanisms hypothesized to produce them**.
+
+That distinction is central to Alife. Persistence, finite resources, a filesystem, autotelic behavior, embodiment, or inheritance might become mechanisms that support open-ended dynamics, but none of them proves that the resulting system is open-ended.
+
+Work such as [**Paired Open-Ended Trailblazer (POET)**](https://arxiv.org/abs/1901.01753) provides another useful precedent. POET jointly generates environmental challenges and agents that solve them, allowing solutions to transfer between environments as stepping stones. The authors report that this open-ended process found solutions to challenges that direct optimization and a direct-path curriculum could not solve. POET still has explicit optimization machinery and differs substantially from Alife, but it illustrates why the history of intermediate discoveries can matter as much as the final objective.
+
+Alife therefore treats open-endedness as a phenomenon to investigate, not a feature to declare.
+
+## Embodiment and Agency
+
+Alife separates the system into **world, body, and mind**:
+
+| Primitive | Meaning in Alife |
+| --- | --- |
+| **World** | The persistent environment: files, directories, programs, processes, and resources. |
+| **Body** | The harness that mediates perception and action, maintains internal state, and runs the cognitive loop. |
+| **Mind** | The language model that receives experience, reasons about it, and produces intentions. |
+
+These are functional roles, not claims that the system is biologically alive or conscious.
+
+The separation is closely related to ideas from **embodied and situated cognition**, where cognition is understood in relation to an agent's ongoing interaction with an environment. Margaret Wilson's review [**Six Views of Embodied Cognition**](https://doi.org/10.3758/BF03196322) identifies several recurring claims in this tradition, including that cognition is situated, that cognitive work can be off-loaded onto the environment, and that cognition is closely tied to action. Earlier, Rodney Brooks argued in [**Intelligence without Representation**](https://people.csail.mit.edu/brooks/papers/representation.pdf) for building intelligent systems around direct perception-action interaction with the world rather than treating intelligence as detached symbolic reasoning.
+
+Alife does not require adopting every philosophical claim associated with embodied cognition. The practical point is narrower: **the model alone is not the agent**. Behavior depends on what the harness lets the model sense, what actions it can execute, and what the world allows those actions to change.
+
+Two agents using the same model can therefore become meaningfully different systems if they inhabit different worlds or bodies.
+
+## Externalized Cognition
+
+A finite context window means that not everything an agent encounters can remain immediately available to the model forever. But information does not have to remain inside the model to continue shaping cognition.
+
+Humans routinely change the environment to make thinking easier. David Kirsh and Paul Maglio called some of these **epistemic actions** in [**On Distinguishing Epistemic from Pragmatic Action**](https://doi.org/10.1207/S15516709COG1804_1). In their Tetris experiments, players sometimes manipulated pieces not simply to move closer to the game's external goal, but because acting in the world made a cognitive problem easier to solve.
+
+A broader philosophical version of this idea appears in Andy Clark and David Chalmers's [**The Extended Mind**](https://doi.org/10.1093/analys/58.1.7), which argues that external structures can sometimes participate in cognitive processes rather than serving only as passive storage.
+
+Alife does not need to settle the philosophical question of whether a filesystem is literally part of a mind. What matters operationally is that the agent can **use the world as cognitive scaffolding**.
+
+A file can preserve a fact. A directory structure can encode an organization scheme. A script can preserve a procedure. An index can make future search cheaper. A database can hold information far beyond the active context window. By changing the world, the agent can change the conditions under which its future reasoning occurs.
+
+This is why persistence is more than storage capacity in Alife. It creates the possibility that cognition can leave structure behind.
+
+## Persistence, History, and Niche Construction
+
+A persistent world retains the consequences of activity beyond a single model invocation. Files remain, programs continue to exist, structures accumulate, and changes made earlier can alter what is possible later.
+
+This is closely related to the biological idea of **niche construction**. [**Niche Construction Theory: A Practical Guide for Ecologists**](https://doi.org/10.1086/669266) describes organisms as modifying their environments in ways that can alter the conditions experienced by themselves and others. When those environmental modifications persist and affect later generations, the resulting legacy is called **ecological inheritance**.
+
+The analogy is unusually direct in a persistent computational world. An agent that builds a tool, reorganizes a directory, consumes a resource, damages a subsystem, or leaves behind information changes the environment encountered by its future self and potentially by later agents.
+
+Artificial-life experiments have shown that these environmental legacies can matter. In [**Evolution of Complex Niche-Constructing Behaviors and Ecological Inheritance of Adaptive Structures in a Physically Grounded Environment**](https://pmc.ncbi.nlm.nih.gov/articles/PMC7805702/), simulated creatures could construct persistent structures in their environment. The experiments found that available resources affected the diversity of emergent structures and that different forms of ecological inheritance changed both diversity and adaptivity.
+
+Alife does not assume that generations, inheritance, or evolution will necessarily emerge. Persistence simply makes history causal: what happens now can change the conditions of what happens next.
+
+A persistent filesystem is therefore not merely a database of past events. It is a world that can acquire a history.
+
+## Finite Worlds and Pressure
+
+Persistence becomes more consequential when the world is finite.
+
+Alife allows experiments to bound disk space, memory, compute, network access, inference budget, or other quantities. Those limits may correspond to real physical resources or to abstract experimental units. The important point is not the specific accounting scheme; it is that some actions can change what remains possible later.
+
+Artificial-life research provides reasons to take environment design seriously. [**Towards Large-Scale Simulations of Open-Ended Evolution in Continuous Cellular Automata**](https://arxiv.org/abs/2304.05639) reports Lenia-based evolutionary simulations that initially generated diversity and creativity but tended to converge toward fast-expanding patterns. Based on those experiments, the author identifies environmental design, conservation laws, and energy constraints as promising ingredients for supporting more sustained open-ended evolution.
+
+Likewise, the niche-construction experiments above found that the number of available resources affected the diversity of structures that emerged. These results do not tell us what resource model Alife should use, but they support a more general lesson: **constraints are not neutral background settings; they can reshape the behavior that a system makes possible.**
+
+This is why Alife treats scarcity as a condition rather than a behavioral instruction. If disk space is running out, the agent might clean up, compress data, stop writing, restructure the world, ignore the problem, or do something we did not anticipate. The pressure is supplied. The response is not.
+
+The model itself is finite too. A maximum context window is another external fact the agent may eventually encounter. Alife does not interpret that automatically as aging, degradation, or mortality. It is simply another constraint whose consequences can be observed.
+
+## Autopoiesis as a Question
+
+**Autopoiesis** is often loosely used to mean self-maintenance, but the original concept is stronger than that.
+
+In [**Autopoiesis: The Organization of Living Systems, Its Characterization and a Model**](https://doi.org/10.1016/0303-2647(74)90031-8), Francisco Varela, Humberto Maturana, and Ricardo Uribe introduced autopoiesis as a way of characterizing living organization. Later analyses, such as [**An Investigation into the Origin of Autopoiesis**](https://direct.mit.edu/artl/article/26/1/5/93263/An-Investigation-into-the-Origin-of-Autopoiesis), emphasize two intertwined ideas: **self-production**, where the system's processes produce components that maintain the process network itself, and **self-individuation**, where the system constructs and maintains its own boundary.
+
+Alife does not hard-code autopoiesis as an imperative. There is no required instruction that the agent must preserve itself, reproduce, or maintain the world in a particular state.
+
+Instead, autopoiesis is one of the phenomena the platform makes possible to ask about. Faced with finite resources and persistent consequences, does an agent begin to maintain the conditions that support its own continued operation? Does it construct tools or structures that preserve the process that created them? Does it alter its environment or body in ways that make the agent more self-sustaining?
+
+If such behavior appears, it should be documented as an observation rather than assumed from the architecture. And because strict autopoiesis is more demanding than generic self-preservation, the term should be used carefully.
+
+## Emergence
+
+Many of the behaviors Alife is interested in are **emergent** in the ordinary artificial-life sense: they would arise from interactions among simpler mechanisms rather than being explicitly encoded as the desired output of the system.
+
+But emergence is itself a contested concept. In [**Emergence in Artificial Life**](https://doi.org/10.1162/artl_a_00397), Carlos Gershenson reviews the difficulty of defining emergence and proposes an information-based framing in which information can be absent at one scale while present at another. More broadly, the paper places emergence near the center of artificial life's synthetic methodology: build simpler systems in which higher-level organization can be observed and studied.
+
+For Alife, calling something emergent should therefore mean more than “the model surprised us.” A behavior is more interesting when it can be traced to interactions among the world's constraints, the body's affordances, the model's behavior, and the history accumulated through previous actions—without that behavior having been directly specified as the experiment's objective.
+
+Examples might include persistent self-maintenance, unexpected tool construction, stable routines, self-generated projects, social behavior between multiple agents, modification of the harness, reproduction, or entirely different patterns we did not think to name in advance.
+
+None of these are promised outcomes. Their absence is also evidence about the system.
+
+## Observation and Interpretation
+
+Alife is intended to be observed as an experiment, not only used as an agent framework.
+
+Artificial-life systems have a long history of emphasizing experimental control and measurement. [**Avida: A Software Platform for Research in Computational Evolutionary Biology**](https://doi.org/10.1162/106454604773563612) was explicitly designed to provide detailed control over experimental conditions, measurement tools, and post-processing methods for populations of evolving computer programs.
+
+Alife follows the same general experimental instinct. The observer remains outside the agent's world, and the architecture can expose a read-only view of the filesystem so that artifacts and history can be inspected without modifying the state the agent experiences.
+
+Observation is different from intervention. Reading a file through that external view does not alter the agent's world; adding a file, changing permissions, editing a prompt, or injecting an instruction does.
+
+Interpretation requires another boundary. An agent writing that it is “curious” does not establish subjective curiosity. Preserving files does not establish a desire to survive. Reproducing does not establish a biological reproductive drive. Terms such as *mind*, *body*, *memory*, *purpose*, and *autopoiesis* are useful models for describing the experiment, but they should not be allowed to become conclusions by metaphor alone.
+
+The goal is to make the conditions explicit, preserve the history, observe what actually happens, and keep a clear distinction between **behavior**, **mechanism**, and **our interpretation of both**.
