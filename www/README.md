@@ -109,6 +109,14 @@ The canonical site URL defaults to `https://alife.sh`. To build for another
 origin, set `NEXT_PUBLIC_SITE_URL` (for example, in `www/.env.local` or your
 hosting environment) **before building**.
 
+Search engines can verify the site either with a DNS TXT record (no build
+change) or with a meta tag: set `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` or
+`NEXT_PUBLIC_BING_SITE_VERIFICATION` to the provider's token in the hosting
+environment and rebuild. The sitemap is at `/sitemap.xml` and robots rules at
+`/robots.txt`; submit the sitemap in Search Console once the property is
+verified. New or updated URLs can also be pushed to Bing and Yandex with
+IndexNow, using the key file under `public/indexnow/`.
+
 The build uses `next/font` to download Google fonts, so it needs network access.
 
 ## License

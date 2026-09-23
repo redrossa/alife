@@ -56,6 +56,21 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  // Search Console tokens come from the environment so verifying a property
+  // needs no code change: paste the token into the hosting environment and
+  // redeploy. DNS TXT verification needs no variables at all.
+  verification: {
+    ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+      ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+      : {}),
+    ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? {
+          other: {
+            "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION,
+          },
+        }
+      : {}),
+  },
 };
 
 export const viewport: Viewport = {
