@@ -3,3 +3,5 @@
 
 # macOS metadata (including files outside www/)
 .DS_Store
+.vercel
+.env*
