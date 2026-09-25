@@ -3,6 +3,7 @@
 ## Scope and sources of truth
 
 - `docs/` owns project concepts, architecture, and other published documentation.
+- `blog/` holds the website's blog posts as MDX, one file per post.
 - `www/` is the Next.js website and documentation app; read `www/AGENTS.md`
   before changing it.
 - `assets/` contains source artwork and generators. Only `www/public/` assets

@@ -22,7 +22,7 @@ export default function DocsRootLayout({ children }: LayoutProps<"/docs">) {
         >
           {children}
         </DocsLayout>
-        <div className="docs-dither" aria-hidden="true" />
+        <div className="site-dither" aria-hidden="true" />
       </div>
     </DocsProvider>
   );

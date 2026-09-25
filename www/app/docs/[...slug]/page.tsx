@@ -9,20 +9,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { getMDXComponents } from "@/mdx-components";
+import { formatDate } from "@/lib/format";
 import { siteName, siteUrl, socialImage } from "@/lib/site";
 import { source } from "@/lib/source";
-
-// Dates in frontmatter are day-granular; format in UTC so the rendered text is
-// stable regardless of the machine running the build.
-const dateFormat = new Intl.DateTimeFormat("en-US", {
-  dateStyle: "long",
-  timeZone: "UTC",
-});
-
-function formatUpdated(value: string) {
-  const date = new Date(value);
-  return Number.isNaN(date.valueOf()) ? value : dateFormat.format(date);
-}
 
 export default async function DocPage(props: PageProps<"/docs/[...slug]">) {
   const params = await props.params;
@@ -57,7 +46,7 @@ export default async function DocPage(props: PageProps<"/docs/[...slug]">) {
       <DocsPage toc={page.data.toc} full={page.data.full}>
         {updated ? (
           <p className="docs-updated">
-            Updated on <time dateTime={updated}>{formatUpdated(updated)}</time>
+            Updated on <time dateTime={updated}>{formatDate(updated)}</time>
           </p>
         ) : null}
         <DocsTitle>{page.data.title}</DocsTitle>

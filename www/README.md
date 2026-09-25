@@ -1,13 +1,13 @@
 # Alife website
 
-The [Alife website](https://alife.sh) and documentation, built with Next.js App
-Router, React, TypeScript, Tailwind CSS, and Fumadocs.
+The [Alife website](https://alife.sh), documentation, and blog, built with
+Next.js App Router, React, TypeScript, Tailwind CSS, and Fumadocs.
 
 ## Get started
 
 Use [Node.js](https://nodejs.org/) 24 LTS (recommended) and npm. Keep the full
-repository checkout: this app reads documentation from the sibling `../docs/`
-directory.
+repository checkout: this app reads documentation and blog posts from the
+sibling `../docs/` and `../blog/` directories.
 
 From the repository root:
 
@@ -41,13 +41,18 @@ Run these from `www/`:
 - `app/page.tsx` — homepage.
 - `app/layout.tsx`, `app/globals.css` — shared layout and styles.
 - `app/docs/` — documentation layouts and page routes.
+- `app/blog/` — blog index and post routes; posts are MDX files in `../blog/`.
 - `app/api/search/route.ts` — documentation search.
 - `components/` — shared UI and documentation components.
-  `docs-sidebar-nav.tsx` is the mobile docs navigation (Docs, GitHub, theme)
-  shown in the Fumadocs sidebar drawer below `md`, where the standalone site
-  header is hidden and the Fumadocs header becomes the only top bar.
+  `site-header.tsx` renders the top navigation and `site-menu.tsx` collapses it
+  into a menu on mobile. `docs-sidebar-nav.tsx` is the mobile docs navigation
+  (Home, Docs, Blog, GitHub, theme) shown in the Fumadocs sidebar drawer below
+  `md`, where the standalone site header is hidden and the Fumadocs header
+  becomes the only top bar.
 - `lib/site.ts` — site URL and shared metadata.
-- `source.config.ts` — Fumadocs collection and MDX configuration.
+- `source.config.ts` — Fumadocs collections and MDX configuration.
+- `lib/source.ts` — loaders for the docs and blog collections.
+- `lib/format.ts` — frontmatter date parsing and formatting.
 - `mdx-components.tsx` — components available in MDX.
 - `public/` — files served at the site root.
 
@@ -90,6 +95,37 @@ Page content.
 
 Do not edit or commit generated `.source/`, `.next/`, or `next-env.d.ts` files.
 
+## Writing blog posts
+
+Blog posts are MDX files in `../blog/`, one file per post. For example,
+`../blog/hello-world.mdx` maps to `/blog/hello-world`. The blog index at
+`/blog` lists published posts newest-first, each with its posted date and
+authors, the title, and a two-line preview of the content.
+
+Each post starts with frontmatter:
+
+```mdx
+---
+title: Post title
+description: A one-sentence summary shown on the post page and link cards.
+posted: 2026-09-23
+authors: [Ada Lovelace, Alan Turing]
+---
+
+## First section
+
+Post content.
+```
+
+- `title`, `description`, and `authors` are required: a string, a one-line
+  summary, and a non-empty list of names shown on the post page.
+- `posted` is an optional ISO date (`YYYY-MM-DD`) that orders the index and
+  dates the post. Without it, a post stays in the repository but is hidden
+  from the site: the index, its route, the sitemap, and adjacent-post links.
+- Posts render through the shared MDX components in `mdx-components.tsx`, so
+  Mermaid fences and other registered components work as they do in the docs.
+- Published posts are included in `/sitemap.xml`.
+
 ## Production
 
 From `www/`:
@@ -101,7 +137,7 @@ npm run build
 npm run start
 ```
 
-Deployment must include **both `www/` and `docs/`**, even when the hosting
+Deployment must include **`www/`, `docs/`, and `blog/`**, even when the hosting
 provider's project directory is `www/`. Keep the repository as the build
 context and allow access to files outside the app directory.
 

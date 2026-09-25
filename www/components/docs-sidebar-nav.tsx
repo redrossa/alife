@@ -1,10 +1,10 @@
 "use client";
 
-import { BookText, House } from "lucide-react";
+import { BookText, House, Newspaper } from "lucide-react";
 import Link from "next/link";
 
 import { ThemeIcon, useTheme } from "@/app/theme-toggle";
-import { GitHubLogo } from "@/components/site-header";
+import { GitHubLogo } from "@/components/logos";
 import { siteRepository } from "@/lib/site";
 
 /*
@@ -27,6 +27,10 @@ export default function DocsSidebarNav() {
       <Link className={item} href="/docs">
         <BookText aria-hidden="true" />
         Docs
+      </Link>
+      <Link className={item} href="/blog">
+        <Newspaper aria-hidden="true" />
+        Blog
       </Link>
       <a className={item} href={siteRepository} target="_blank" rel="noreferrer">
         <GitHubLogo aria-hidden="true" />

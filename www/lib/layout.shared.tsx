@@ -1,6 +1,6 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 
-import { LogoMark } from "@/components/site-header";
+import { LogoMark } from "@/components/logos";
 
 export function baseOptions(): BaseLayoutProps {
   return {

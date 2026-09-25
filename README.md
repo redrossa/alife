@@ -25,15 +25,17 @@ exploring the conditions that could make that possible, not scripting the outcom
 
 **[Explore the website →](https://alife.sh)** · **[Read the docs →](https://alife.sh/docs)**
 
-This repository currently contains the website and documentation.
+This repository currently contains the website, documentation, and blog.
 
 ## Working in this repository
 
 - `docs/` — documentation source (MDX) and sidebar ordering (`meta.json`).
-- `www/` — the Next.js app that serves the website and documentation.
+- `blog/` — blog posts (MDX), listed at `/blog`.
+- `www/` — the Next.js app that serves the website, documentation, and blog.
 - `assets/` — source artwork and asset-generation tools; served assets live in `www/public/`.
 
-Edit documentation directly in `docs/`; the development server picks up changes.
+Edit documentation directly in `docs/` and blog posts in `blog/`; the
+development server picks up changes.
 See [www/README.md](www/README.md) for app setup, checks, and production builds.
 Run website commands from `www/`.
 

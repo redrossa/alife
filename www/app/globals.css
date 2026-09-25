@@ -2,8 +2,9 @@
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
 
-/* Include the sibling MDX content directory in Tailwind's class scan. */
+/* Include the sibling MDX content directories in Tailwind's class scan. */
 @source "../../docs";
+@source "../../blog";
 
 /*
  * Semantic color tokens. Every value below is Tailwind's own stone palette,
@@ -255,8 +256,8 @@ body:has(.terrain-home) {
   background-repeat: repeat;
 }
 
-/* Dither grain behind the docs, matching the landing page. */
-.docs-dither {
+/* Dither grain behind the docs and blog, matching the landing page. */
+.site-dither {
   position: fixed;
   inset: 0;
   z-index: -1;
@@ -264,7 +265,7 @@ body:has(.terrain-home) {
   background: var(--background);
 }
 
-.docs-dither::after {
+.site-dither::after {
   content: "";
   position: absolute;
   inset: 0;

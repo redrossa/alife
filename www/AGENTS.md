@@ -6,8 +6,12 @@ setup and commands.
 - Use the App Router, TypeScript, and the existing Tailwind/Fumadocs setup.
   Keep components server-rendered unless browser APIs or interaction require
   a client component.
-- Documentation lives in `../docs/`. `source.config.ts` defines the collection;
-  `lib/source.ts` is the shared loader for routes, navigation, search, and sitemap.
+- Documentation lives in `../docs/` and blog posts in `../blog/`.
+  `source.config.ts` defines both collections; `lib/source.ts` is the shared
+  loader for routes, navigation, search, and sitemap.
+- Blog posts require `title`, `description`, and `authors` frontmatter, plus
+  an optional `posted` ISO date. The blog index sorts by `posted` and previews
+  each post's content; posts without `posted` are hidden from the site.
 - Keep unpublished stubs excluded in `source.config.ts` until their content is
   ready. Do not publish them just to fill out navigation.
 - Register shared MDX components in `mdx-components.tsx` and place served assets
