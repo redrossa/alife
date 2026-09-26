@@ -16,6 +16,13 @@ setup and commands.
   ready. Do not publish them just to fill out navigation.
 - Register shared MDX components in `mdx-components.tsx` and place served assets
   in `public/`.
+- A component used by a single docs page belongs next to that page in `../docs`,
+  imported by its MDX (`import { Thing } from "./thing"`). This works: the
+  sibling `.tsx` sits outside `www/`, but `fumadocs-mdx` preserves the relative
+  import and the repository-wide Turbopack root resolves it (verified with a
+  probe page). Only reach for `mdx-components.tsx` when several pages need the
+  same component. Note `source.config.ts` collects `**/*.{md,mdx}`, so a `.tsx`
+  beside a page never becomes a route.
 - Use shadcn/ui for reusable UI. `components/ui/` holds registry components
   **unedited**: keep them exactly as `npx shadcn@latest add <name>` writes them
   (imports from `cn`, nova sizes, `data-*` attributes, variant names) so they

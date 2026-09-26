@@ -163,6 +163,10 @@ Page content.
 - Headings generate the table of contents; the page title comes from frontmatter.
 - Register reusable MDX components in `mdx-components.tsx`. Mermaid code fences
   are supported.
+- A component only one docs page uses goes next to that page in `../docs` and is
+  imported by its MDX (`import { Diagram } from "./diagram"`). Shared components
+  are registered in `mdx-components.tsx` instead. Only `.md`/`.mdx` files become
+  pages, so a sibling `.tsx` is never routed.
 - Put served images in `public/` and reference them by URL, such as
   `/images/docs/diagram.png`. Repository-root `assets/` is not served directly.
 - `configuration.mdx` and `experiments.mdx` are unpublished stubs excluded in
