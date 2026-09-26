@@ -6,46 +6,59 @@ import { useTheme } from "next-themes";
 
 import { GitHubLogo } from "@/components/logos";
 import { ThemeIcon } from "@/components/mode-toggle";
+import { Button } from "@/components/ui/button";
 import { siteRepository } from "@/lib/site";
 
 /*
  * Mobile-only navigation for the docs sidebar drawer. On desktop the shared
  * site header above the docs layout carries the brand, GitHub, and theme
  * controls; below `md` that header is hidden and these items live here.
+ *
+ * These are the site menu's rows in a different drawer, so they use the same
+ * `ghost` Buttons and the same 44px rows. The surrounding docs tree is
+ * Fumadocs' own markup, so only the row layout matches the site menu; colours,
+ * hover, radius, and focus come from the shared Button and its tokens.
  */
+const item = "h-11 w-full justify-start";
+
 export default function DocsSidebarNav() {
   const { resolvedTheme, setTheme } = useTheme();
-  // Mirrors Fumadocs' sidebar item styling so the links read as part of the tree.
-  const item =
-    "flex w-full cursor-pointer items-center gap-2 rounded-lg p-2 text-start text-fd-muted-foreground transition-colors hover:bg-fd-accent/50 hover:text-fd-accent-foreground/80 focus-visible:outline-2 focus-visible:outline-fd-ring [&_svg]:size-4 [&_svg]:shrink-0";
 
   return (
-    <nav className="flex flex-col gap-1 pb-1 md:hidden" aria-label="Site navigation">
-      <Link className={item} href="/">
-        <House aria-hidden="true" />
-        Home
-      </Link>
-      <Link className={item} href="/docs">
-        <BookText aria-hidden="true" />
-        Docs
-      </Link>
-      <Link className={item} href="/blog">
-        <Newspaper aria-hidden="true" />
-        Blog
-      </Link>
-      <a className={item} href={siteRepository} target="_blank" rel="noreferrer">
-        <GitHubLogo aria-hidden="true" />
-        GitHub
-      </a>
-      <button
+    <nav className="flex flex-col md:hidden" aria-label="Site navigation">
+      <Button asChild variant="ghost" className={item}>
+        <Link href="/">
+          <House aria-hidden="true" />
+          Home
+        </Link>
+      </Button>
+      <Button asChild variant="ghost" className={item}>
+        <Link href="/docs">
+          <BookText aria-hidden="true" />
+          Docs
+        </Link>
+      </Button>
+      <Button asChild variant="ghost" className={item}>
+        <Link href="/blog">
+          <Newspaper aria-hidden="true" />
+          Blog
+        </Link>
+      </Button>
+      <Button asChild variant="ghost" className={item}>
+        <a href={siteRepository} target="_blank" rel="noreferrer">
+          <GitHubLogo aria-hidden="true" />
+          GitHub
+        </a>
+      </Button>
+      <Button
         type="button"
+        variant="ghost"
         className={item}
         onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-        aria-label="Toggle theme"
       >
         <ThemeIcon />
         Theme
-      </button>
+      </Button>
     </nav>
   );
 }
