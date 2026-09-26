@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 
 import BlogContainer from "@/components/blog-container";
 import BlogPostNav from "@/components/blog-post-nav";
+import { Button } from "@/components/ui/button";
 import { formatDate, toDate } from "@/lib/format";
 import { siteName, siteUrl, socialImage } from "@/lib/site";
 import { blog, getBlogPosts } from "@/lib/source";
@@ -54,13 +55,12 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
   return (
     <>
       <BlogContainer>
-        <Link
-          className="mb-8 inline-flex items-center gap-1.5 self-start text-sm text-fd-muted-foreground no-underline hover:text-fd-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fd-ring"
-          href="/blog"
-        >
-          <ChevronLeft className="-mx-1 size-4 shrink-0" aria-hidden="true" />
-          All posts
-        </Link>
+        <Button asChild variant="link" className="mb-8 self-start px-0">
+          <Link href="/blog">
+            <ChevronLeft className="-mx-1" aria-hidden="true" />
+            All posts
+          </Link>
+        </Button>
         <article className="flex flex-col gap-4">
           <p className="docs-updated">
             <time dateTime={published.toISOString()}>

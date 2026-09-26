@@ -11,18 +11,19 @@ const clientStore = {
   getServerSnapshot: () => false,
 };
 
+/* next-themes writes the resolved theme to the `.dark` class; observing that
+   attribute covers user toggles and system-preference changes alike. */
 function subscribe(callback: () => void) {
-  const media = matchMedia("(prefers-color-scheme: dark)");
-  window.addEventListener("alife-theme-change", callback);
-  media.addEventListener("change", callback);
-  return () => {
-    window.removeEventListener("alife-theme-change", callback);
-    media.removeEventListener("change", callback);
-  };
+  const observer = new MutationObserver(callback);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  return () => observer.disconnect();
 }
 
 function themeSnapshot(): Theme {
-  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+  return document.documentElement.classList.contains("dark") ? "dark" : "light";
 }
 
 const themeVariables: Record<Theme, Record<string, string | boolean>> = {

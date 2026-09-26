@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
+import { Button } from "@/components/ui/button";
 import TerrainBackground from "./terrain-background";
 
 import { siteRepository } from "@/lib/site";
@@ -25,7 +26,7 @@ export default function Home() {
           className="flex flex-1 flex-col justify-center py-12 sm:py-16 lg:py-24"
           aria-labelledby="hero-title"
         >
-          <p className="text-xs tracking-widest text-muted uppercase">
+          <p className="text-xs tracking-widest text-muted-foreground uppercase">
             Coming soon
           </p>
           <h1
@@ -36,28 +37,24 @@ export default function Home() {
             <br className="hidden sm:inline" />
             <em>and the freedom to become curious?</em>
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:mt-8 sm:text-lg">
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-8 sm:text-lg">
             A digital terrarium for <em>autotelic agents:</em> AI systems capable of
             developing and pursuing their own goals in an open-ended environment.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center">
-            <Link
-              className="inline-flex min-h-11 w-full items-center justify-center rounded-sm bg-accent px-4 py-3 text-sm font-medium text-on-accent no-underline hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground active:bg-accent-active sm:w-auto"
-              href="/docs"
-            >
-              Learn more
-            </Link>
-            <a
-              className="inline-flex min-h-11 w-full items-center justify-center rounded-sm border border-rule bg-background px-4 py-3 text-sm font-medium text-foreground no-underline hover:bg-surface-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground active:bg-surface-active sm:w-auto"
-              href={siteRepository}
-            >
-              View on GitHub
-            </a>
+            {/* The height/padding keep Alife's 44px call to action; shadcn's
+                default size is a denser 32px control. */}
+            <Button asChild className="h-11 w-full px-4 sm:w-auto">
+              <Link href="/docs">Learn more</Link>
+            </Button>
+            <Button asChild variant="secondary" className="h-11 w-full px-4 sm:w-auto">
+              <a href={siteRepository}>View on GitHub</a>
+            </Button>
           </div>
         </section>
       </main>
 
-      <footer className="site-nav-container flex justify-center py-7 text-sm text-muted sm:justify-end">
+      <footer className="site-nav-container flex justify-center py-7 text-sm text-muted-foreground sm:justify-end">
         <p>Alife © 2026</p>
       </footer>
       </div>

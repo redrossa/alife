@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DocsTitle } from "fumadocs-ui/layouts/docs/page";
 
 import BlogContainer from "@/components/blog-container";
+import { Button } from "@/components/ui/button";
 import { formatDate, toDate } from "@/lib/format";
 import { getBlogPosts } from "@/lib/source";
 
@@ -61,12 +62,9 @@ export default function BlogIndexPage() {
               <p className="line-clamp-2 text-sm text-fd-muted-foreground">
                 {getSnippet(post.data.structuredData.contents)}
               </p>
-              <Link
-                className="self-start text-sm font-medium no-underline hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fd-ring"
-                href={post.url}
-              >
-                Read more
-              </Link>
+              <Button asChild variant="link" className="self-start px-0">
+                <Link href={post.url}>Read more</Link>
+              </Button>
             </li>
           ))}
         </ul>

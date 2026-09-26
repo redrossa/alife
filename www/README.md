@@ -43,18 +43,94 @@ Run these from `www/`:
 - `app/docs/` — documentation layouts and page routes.
 - `app/blog/` — blog index and post routes; posts are MDX files in `../blog/`.
 - `app/api/search/route.ts` — documentation search.
-- `components/` — shared UI and documentation components.
-  `site-header.tsx` renders the top navigation and `site-menu.tsx` collapses it
-  into a menu on mobile. `docs-sidebar-nav.tsx` is the mobile docs navigation
+- `components/` — shared UI and documentation components. `components/ui/`
+  holds unedited shadcn/ui primitives; the rest are Alife compositions.
+  `site-header.tsx` renders the top navigation and `site-menu.tsx` collapses
+  it into a full-height Sheet below `md`. `theme-provider.tsx` and
+  `mode-toggle.tsx` wrap
+  next-themes. `docs-sidebar-nav.tsx` is the mobile docs navigation
   (Home, Docs, Blog, GitHub, theme) shown in the Fumadocs sidebar drawer below
   `md`, where the standalone site header is hidden and the Fumadocs header
   becomes the only top bar.
+- `lib/utils.ts` — `cn()`, re-exported from shadcn's `cn` package.
+- `components.json` — shadcn/ui generator configuration.
 - `lib/site.ts` — site URL and shared metadata.
 - `source.config.ts` — Fumadocs collections and MDX configuration.
 - `lib/source.ts` — loaders for the docs and blog collections.
 - `lib/format.ts` — frontmatter date parsing and formatting.
 - `mdx-components.tsx` — components available in MDX.
 - `public/` — files served at the site root.
+
+## UI components and theming
+
+The interface is built on [shadcn/ui](https://ui.shadcn.com/). Components in
+`components/ui/` are the registry output **unedited**, so they can be
+regenerated or updated later; Alife's design is expressed in
+`app/globals.css` tokens and at the call sites that use them.
+
+Add a primitive only when something consumes it:
+
+```bash
+cd www
+npx shadcn@latest add dialog
+```
+
+The generator reads `components.json` and `app/globals.css`. Review its diff:
+it may want to add a stock palette, an extra provider, or a new dependency.
+Overlay components (Sheet, Dialog) animate with `tw-animate-css` and shadcn's
+`data-open`/`data-closed` variants; both are already wired up in `globals.css`,
+so adding one needs no further CSS setup.
+
+### Theme tokens
+
+`app/globals.css` defines shadcn's semantic token set with Alife's values
+(Tailwind's stone palette, pure-black dark background).
+
+| Token group | Meaning |
+| --- | --- |
+| `background`, `foreground` | Page background and body text |
+| `card`, `popover` | Tonal surface and opaque overlay surface |
+| `primary`, `primary-foreground` | Accent actions; hover is the component's own `bg-primary/80` |
+| `muted`, `secondary`, `accent` | Quiet surfaces (hover, selection) |
+| `muted-foreground` | Muted text |
+| `border`, `input`, `ring` | Rules, control borders, focus color |
+| `surface-hover` | Translucent hover fill for quiet buttons |
+| `surface-active` | Stronger surface for the Fumadocs dark sidebar |
+| `destructive` | Errors and destructive actions |
+
+`--surface-hover` and `--surface-active` are the additions beyond shadcn's
+set. `globals.css` applies the former to `ghost`, `outline`, and `secondary`
+button hovers: their generated hovers are a single stone step from the page (or
+a 5% foreground tint, on `secondary`) and the dither grain flattens what is
+left of them, so they use the next stone step held at 80% opacity — strong
+enough to read, translucent enough to keep the grain visible through the
+control. The rule targets `[data-slot='button']` by `data-variant`, which keeps
+`components/ui/` untouched.
+
+Prefer these over raw Tailwind colors so both themes keep working. Remember
+that in shadcn's vocabulary `muted` and `accent` are surfaces: muted text is
+`text-muted-foreground`.
+
+`--radius` is Alife's 4px corner, and the `@theme inline` scale derives the
+smaller steps from it (`--radius-lg` is `--radius`). Generated components land
+on the site radius instead of shadcn's 10px default; because it is a global
+scale, Fumadocs' own surfaces follow it too.
+
+When a call site needs different geometry — the 44px header buttons and hero
+calls to action — pass **layout only** as `className` (size, spacing, flex
+alignment, display) and leave colors, radius, borders, and typography to the
+component and the tokens.
+
+### Dark mode
+
+[next-themes](https://github.com/pacocoursey/next-themes) owns theming, mounted
+once in `app/layout.tsx` through `components/theme-provider.tsx` with
+`attribute="class"`, a system default, and `storageKey="alife-theme"`. It writes
+the `.dark` class and `color-scheme` before paint, and every `dark:` utility
+keys off that class through the `@custom-variant dark` rule in `globals.css`.
+`components/mode-toggle.tsx` is the toggle; use `useTheme` from `next-themes` in
+any new component rather than adding another provider. The docs `RootProvider`
+keeps its own theme provider disabled so only one writes to `<html>`.
 
 ## Editing documentation
 

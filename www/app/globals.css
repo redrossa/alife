@@ -1,68 +1,133 @@
 @import "tailwindcss";
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
+/* Enter/exit animations for overlays (`animate-in`, `fade-in-0`,
+   `slide-in-from-left-10`), which shadcn's Sheet and Dialog generate. */
+@import "tw-animate-css";
+
+/*
+ * Dark mode follows the `.dark` class written by next-themes (see
+ * `components/theme-provider.tsx`). The `:where()` keeps these variants at
+ * zero specificity, so a utility that happens to match is still easy to
+ * override in component code.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * The state variants shadcn's generated components use for open/close
+ * transitions, copied from the preset's `tailwind.css` rather than importing
+ * that file — it also carries a few hundred lines of scroll-fade and shimmer
+ * utilities nothing here uses. Add the preset's other data-* variants
+ * (`data-checked`, `data-selected`, …) when a component actually needs them.
+ */
+@custom-variant data-open {
+  &:where([data-state="open"]),
+  &:where([data-open]:not([data-open="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-closed {
+  &:where([data-state="closed"]),
+  &:where([data-closed]:not([data-closed="false"])) {
+    @slot;
+  }
+}
 
 /* Include the sibling MDX content directories in Tailwind's class scan. */
 @source "../../docs";
 @source "../../blog";
 
 /*
- * Semantic color tokens. Every value below is Tailwind's own stone palette,
- * spelled in sRGB so the tokens resolve at cascade time and flip with the
- * system theme.
+ * Semantic color tokens, named after shadcn/ui's contract so generated
+ * components work untouched, but carrying Alife's values: Tailwind's stone
+ * palette, spelled in sRGB, with a pure-black dark background. Dark mode is a
+ * single `.dark` block, and next-themes owns `color-scheme` through its
+ * `enableColorScheme` default.
+ *
+ * This is the token list the shadcn preset generates, plus three Alife values:
+ * `--card`, `--surface-hover`, and `--surface-active`. Hover and pressed states
+ * otherwise stay with the components (`hover:bg-primary/80` and friends)
+ * instead of adding extra shades to this list.
+ *
+ * `--card` is the one tonal surface: Alife panels are normally background plus
+ * a border (see `--popover`), but Fumadocs cards already rendered as stone-100
+ * before this migration, so the token keeps that value. `--surface-active` is
+ * the stronger surface the Fumadocs dark sidebar override asks for.
+ *
+ * `--surface-hover` is the fill behind quiet controls on hover. It is held
+ * slightly translucent so the dither grain keeps reading through it instead of
+ * the control turning into a solid chip.
+ *
+ * `--radius` carries Alife's 4px corner. shadcn's scale derives the smaller
+ * steps from it, so generated components land on the site's radius rather than
+ * the generator's 10px default.
  */
 :root {
-  color-scheme: light dark;
+  --radius: 0.25rem;
 
   --background: #fafaf9; /* stone-50 */
   --foreground: #292524; /* stone-800 */
-  --muted: #57534d; /* stone-600 */
-  --rule: #d6d3d1; /* stone-300 */
 
-  --accent: #292524; /* stone-800 */
-  --accent-hover: #44403b; /* stone-700 */
-  --accent-active: #1c1917; /* stone-900 */
-  --on-accent: #fafaf9; /* stone-50 */
+  --card: #f5f5f4; /* stone-100 */
+  --card-foreground: #292524; /* stone-800 */
+  --popover: #fafaf9; /* stone-50 */
+  --popover-foreground: #292524; /* stone-800 */
 
-  --surface-hover: #f5f5f4; /* stone-100 */
+  --primary: #292524; /* stone-800 */
+  --primary-foreground: #fafaf9; /* stone-50 */
+
+  --secondary: #f5f5f4; /* stone-100 */
+  --secondary-foreground: #292524; /* stone-800 */
+  --muted: #f5f5f4; /* stone-100 */
+  --muted-foreground: #57534d; /* stone-600 */
+  --accent: #f5f5f4; /* stone-100 */
+  --accent-foreground: #292524; /* stone-800 */
+
+  --surface-hover: color-mix(in oklab, #e7e5e4 80%, transparent); /* stone-200 @ 80% */
   --surface-active: #e7e5e4; /* stone-200 */
+
+  --destructive: #dc2626; /* red-600 */
+  --destructive-foreground: #fafaf9; /* stone-50 */
+
+  --border: #d6d3d1; /* stone-300 */
+  --input: #d6d3d1; /* stone-300 */
+  /* Focus must stay clearly visible, so it tracks body text, not the rule. */
+  --ring: #292524; /* stone-800 */
 
   /* 4×4 Bayer ordered-dither tile, 6 lit dots of 16. */
   --dither-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' shape-rendering='crispEdges'%3E%3Cpath fill='%23292524' fill-opacity='0.065' d='M0 0h1v1H0zM2 0h1v1H2zM1 1h1v1H1zM0 2h1v1H0zM2 2h1v1H2zM3 3h1v1H3z'/%3E%3C/svg%3E");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --background: #000000; /* black */
-    --foreground: #f5f5f4; /* stone-100 */
-    --muted: #a6a09b; /* stone-400 */
-    --rule: #292524; /* stone-800 */
+.dark {
+  --background: #000000; /* black */
+  --foreground: #f5f5f4; /* stone-100 */
 
-    --accent: #f5f5f4; /* stone-100 */
-    --accent-hover: #e7e5e4; /* stone-200 */
-    --accent-active: #d6d3d1; /* stone-300 */
-    --on-accent: #1c1917; /* stone-900 */
+  --card: #1c1917; /* stone-900 */
+  --card-foreground: #f5f5f4; /* stone-100 */
+  --popover: #000000; /* black */
+  --popover-foreground: #f5f5f4; /* stone-100 */
 
-    --surface-hover: #1c1917; /* stone-900 */
-    --surface-active: #292524; /* stone-800 */
+  --primary: #f5f5f4; /* stone-100 */
+  --primary-foreground: #1c1917; /* stone-900 */
 
-    --dither-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' shape-rendering='crispEdges'%3E%3Cpath fill='%23f1f3f9' fill-opacity='0.058' d='M0 0h1v1H0zM2 0h1v1H2zM1 1h1v1H1zM0 2h1v1H0zM2 2h1v1H2zM3 3h1v1H3z'/%3E%3C/svg%3E");
-  }
-}
+  --secondary: #1c1917; /* stone-900 */
+  --secondary-foreground: #f5f5f4; /* stone-100 */
+  --muted: #1c1917; /* stone-900 */
+  --muted-foreground: #a6a09b; /* stone-400 */
+  --accent: #1c1917; /* stone-900 */
+  --accent-foreground: #f5f5f4; /* stone-100 */
 
-:root[data-theme='light'] { color-scheme: light; }
-:root[data-theme='dark'] {
-  color-scheme: dark;
-  --background: #000000;
-  --foreground: #f5f5f4;
-  --muted: #a6a09b;
-  --rule: #292524;
-  --accent: #f5f5f4;
-  --accent-hover: #e7e5e4;
-  --accent-active: #d6d3d1;
-  --on-accent: #1c1917;
-  --surface-hover: #1c1917;
-  --surface-active: #292524;
+  --surface-hover: color-mix(in oklab, #292524 80%, transparent); /* stone-800 @ 80% */
+  --surface-active: #292524; /* stone-800 */
+
+  --destructive: #f87171; /* red-400 */
+  --destructive-foreground: #1c1917; /* stone-900 */
+
+  --border: #292524; /* stone-800 */
+  --input: #292524; /* stone-800 */
+  --ring: #f5f5f4; /* stone-100 */
+
   --dither-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' shape-rendering='crispEdges'%3E%3Cpath fill='%23f1f3f9' fill-opacity='0.058' d='M0 0h1v1H0zM2 0h1v1H2zM1 1h1v1H1zM0 2h1v1H0zM2 2h1v1H2zM3 3h1v1H3z'/%3E%3C/svg%3E");
 }
 
@@ -75,27 +140,27 @@
 :root {
   --color-fd-background: var(--background);
   --color-fd-foreground: var(--foreground);
-  --color-fd-muted: var(--surface-hover);
-  --color-fd-muted-foreground: var(--muted);
-  --color-fd-popover: var(--background);
-  --color-fd-popover-foreground: var(--foreground);
-  --color-fd-card: var(--surface-hover);
-  --color-fd-card-foreground: var(--foreground);
-  --color-fd-border: var(--rule);
-  --color-fd-primary: var(--accent);
-  --color-fd-primary-foreground: var(--on-accent);
-  --color-fd-secondary: var(--surface-hover);
-  --color-fd-secondary-foreground: var(--foreground);
-  --color-fd-accent: var(--surface-hover);
-  --color-fd-accent-foreground: var(--foreground);
-  --color-fd-ring: var(--rule);
+  --color-fd-muted: var(--muted);
+  --color-fd-muted-foreground: var(--muted-foreground);
+  --color-fd-popover: var(--popover);
+  --color-fd-popover-foreground: var(--popover-foreground);
+  --color-fd-card: var(--card);
+  --color-fd-card-foreground: var(--card-foreground);
+  --color-fd-border: var(--border);
+  --color-fd-primary: var(--primary);
+  --color-fd-primary-foreground: var(--primary-foreground);
+  --color-fd-secondary: var(--secondary);
+  --color-fd-secondary-foreground: var(--secondary-foreground);
+  --color-fd-accent: var(--accent);
+  --color-fd-accent-foreground: var(--accent-foreground);
+  --color-fd-ring: var(--ring);
 }
 
 /* The neutral theme's dark sidebar values use its own grays; keep stone here. */
 .dark #nd-sidebar {
   --color-fd-muted: var(--surface-active);
   --color-fd-secondary: var(--surface-active);
-  --color-fd-muted-foreground: var(--muted);
+  --color-fd-muted-foreground: var(--muted-foreground);
 }
 
 /*
@@ -250,7 +315,7 @@ body:has(.terrain-home) {
 
 /* Docs navbar: same grain as the page, with a rule separating it. */
 .docs-nav {
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--border);
   background-color: var(--background);
   background-image: var(--dither-dots);
   background-repeat: repeat;
@@ -300,21 +365,63 @@ body:has(.terrain-home) {
 /* Frontmatter `updated` date: a muted meta line above the page title. */
 .docs-updated {
   font-size: 0.875rem;
-  color: var(--muted);
+  color: var(--muted-foreground);
+}
+
+/*
+ * Quiet shadcn buttons hover on the stronger surface.
+ *
+ * Their generated hovers are `bg-muted` — one stone step from the page — or,
+ * for `secondary`, a 5% tint of the foreground. Neither survives the dither
+ * grain, so a quiet button looks inert under the cursor. These variants step to
+ * `--surface-hover` instead: the next stone step up, held translucent so the
+ * grain stays visible through the control. `aria-expanded` is included so an
+ * open menu trigger keeps the state its own class set.
+ *
+ * `[data-variant]` is shadcn's public hook for theme-level adjustments like
+ * this one; `components/ui/` stays untouched. Unlayered rules outrank Tailwind's
+ * `@layer utilities`, so this also replaces the `dark:hover:bg-muted/50` half
+ * and the opaque `color-mix()` on `secondary`.
+ */
+[data-slot='button']:where([data-variant='ghost'], [data-variant='outline'], [data-variant='secondary']):hover,
+[data-slot='button']:where([data-variant='ghost'], [data-variant='outline'], [data-variant='secondary'])[aria-expanded='true'] {
+  background-color: var(--surface-hover);
 }
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
+  /* shadcn/ui contract. `inline` matters: it makes utilities resolve these at
+     the point of use, so they follow the theme controller's tokens. */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
-  --color-rule: var(--rule);
+  --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-accent-active: var(--accent-active);
-  --color-on-accent: var(--on-accent);
+  --color-accent-foreground: var(--accent-foreground);
   --color-surface-hover: var(--surface-hover);
   --color-surface-active: var(--surface-active);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* shadcn's radius scale, anchored to Alife's 4px `--radius`. */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }

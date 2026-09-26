@@ -21,7 +21,7 @@ export function ArchitectureDiagram(props: ComponentProps<"svg">) {
 
       <g
         fill="none"
-        stroke="var(--rule)"
+        stroke="var(--border)"
         strokeWidth="1.5"
         rx="8"
         strokeLinejoin="round"
@@ -50,7 +50,7 @@ export function ArchitectureDiagram(props: ComponentProps<"svg">) {
       </g>
 
       <g
-        fill="var(--muted)"
+        fill="var(--muted-foreground)"
         fontSize="12"
         textAnchor="middle"
         fontFamily="var(--font-geist-sans)"
@@ -68,7 +68,7 @@ export function ArchitectureDiagram(props: ComponentProps<"svg">) {
 
       <g
         fill="none"
-        stroke="var(--muted)"
+        stroke="var(--muted-foreground)"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -84,7 +84,7 @@ export function ArchitectureDiagram(props: ComponentProps<"svg">) {
       </g>
 
       <g
-        fill="var(--muted)"
+        fill="var(--muted-foreground)"
         fontSize="11"
         textAnchor="middle"
         fontFamily="var(--font-geist-sans)"

@@ -16,8 +16,47 @@ setup and commands.
   ready. Do not publish them just to fill out navigation.
 - Register shared MDX components in `mdx-components.tsx` and place served assets
   in `public/`.
-- Preserve the existing theme controller in `app/theme-toggle.tsx` and theme
-  initialization in `app/layout.tsx`; do not add a competing provider.
+- Use shadcn/ui for reusable UI. `components/ui/` holds registry components
+  **unedited**: keep them exactly as `npx shadcn@latest add <name>` writes them
+  (imports from `cn`, nova sizes, `data-*` attributes, variant names) so they
+  can be regenerated or upgraded. Add one only when something consumes it, and
+  review the diff for extra dependencies it wants to introduce.
+- Express the design through `app/globals.css` and call sites, never by editing
+  a generated component. Reach for a token first; if a control needs different
+  geometry (44px header buttons and hero calls to action), pass **layout only**
+  as `className` at the call site — size, spacing, flex alignment, display — so
+  the override stays visible where it applies. Colors, radius, borders,
+  shadows, and typography belong to the component and the tokens.
+- Style with the semantic tokens in `app/globals.css`; do not hard-code stone
+  values or reintroduce removed tokens. `--muted`, `--accent`, and `--card`
+  follow shadcn's meaning (surfaces), so muted *text* is
+  `text-muted-foreground`. Two Alife shades sit outside shadcn's set:
+  `--surface-hover`, the translucent fill quiet button hovers step up to
+  because the dither flattens the generated one-step `bg-muted` hover and an
+  opaque fill would hide the grain, and `--surface-active` for the Fumadocs
+  dark sidebar rows. The hover adjustment lives in `globals.css` as a rule on
+  `[data-slot='button'][data-variant='ghost'|'outline'|'secondary']` —
+  `data-variant` is
+  shadcn's hook for theme-level changes, so components stay untouched. Other
+  hover and pressed styling stays on the components (`hover:bg-primary/80`).
+  `--radius` is Alife's 4px corner and the `@theme inline` scale derives every
+  smaller step from it; generated components therefore use the site radius, and
+  Fumadocs surfaces follow the same scale.
+- Keep `components.json` aliases authoritative and preserve the
+  `@custom-variant dark` hook.
+- Overlays (Sheet, Dialog, …) animate through `tw-animate-css` plus shadcn's
+  `data-open`/`data-closed` variants, both wired up in `globals.css`. When a
+  new component needs another preset variant (`data-checked`, `data-selected`,
+  …), copy that one definition in the same way instead of importing the
+  preset's whole `tailwind.css`, which is mostly unused scroll-fade/shimmer
+  utilities.
+- Theming is next-themes, mounted once in `app/layout.tsx` via
+  `components/theme-provider.tsx` (attribute="class", system default,
+  `storageKey="alife-theme"`). It owns the `.dark` class and `color-scheme`.
+  Use `useTheme` from `next-themes` in components — do not add a second theme
+  provider — and keep the docs `RootProvider` theme disabled so only one
+  provider writes to `<html>.` `components/mode-toggle.tsx` shows both icons
+  and lets `dark:` pick one, which avoids mounted-state hydration guards.
 - Keep site metadata centralized in `lib/site.ts` and preserve canonical docs
   URLs when changing routes.
 - Keep the repository-wide Turbopack root: the app needs to resolve and watch

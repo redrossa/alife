@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 import { siteDescription, siteName, siteRepository, siteUrl, socialImage } from "@/lib/site";
 import "./globals.css";
 
@@ -103,15 +104,22 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: `(function(){var p='system';try{var s=localStorage.getItem('alife-theme');if(s==='light'||s==='dark')p=s;}catch(e){}var r=document.documentElement;var d=p==='system'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):p;r.dataset.themePreference=p;r.dataset.theme=d;r.classList.toggle('dark',d==='dark');})();` }} />
-      </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
-        {children}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
+        {/* next-themes writes the resolved theme to the `.dark` class before
+            paint; `storageKey` keeps the key existing visitors already have. */}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+          storageKey="alife-theme"
+        >
+          {children}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          />
+        </ThemeProvider>
       </body>
     </html>
   );

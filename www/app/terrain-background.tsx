@@ -158,7 +158,6 @@ export default function TerrainBackground() {
   useEffect(() => {
     const canvas = ref.current;
     if (!canvas) return;
-    const theme = matchMedia("(prefers-color-scheme: dark)");
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     let currentTravel = 0;
     let targetTravel = 0;
@@ -247,8 +246,7 @@ export default function TerrainBackground() {
         }
         gl.viewport(0,0,canvas.width,canvas.height);
         gl.uniform2f(resolution,canvas.width,canvas.height);
-        const selectedTheme = document.documentElement.dataset.theme;
-        gl.uniform1f(night, (selectedTheme ? selectedTheme === "dark" : theme.matches) ? 1 : 0);
+        gl.uniform1f(night, document.documentElement.classList.contains("dark") ? 1 : 0);
         gl.uniform1f(travel,currentTravel);
         gl.uniform1f(starTravel,currentTravel * (reduced.matches ? 0.15 : 1));
         gl.uniform1f(starSpeed,velocity * (reduced.matches ? 0.15 : 1));
@@ -350,8 +348,11 @@ export default function TerrainBackground() {
       window.addEventListener("touchend",touchEnd);
       window.addEventListener("touchcancel",touchEnd);
       document.addEventListener("visibilitychange",visibility);
-      theme.addEventListener("change",onThemeChange);
-      window.addEventListener("alife-theme-change",onThemeChange);
+      /* next-themes writes the resolved theme to the `.dark` class, so the class
+         is authoritative — observing it catches both a user toggle and a
+         system-preference change while the theme is "system". */
+      const themeObserver = new MutationObserver(() => onThemeChange());
+      themeObserver.observe(document.documentElement,{attributes:true,attributeFilter:["class"]});
       reduced.addEventListener("change",schedule);
       canvas.addEventListener("webglcontextlost",onLost);
       canvas.addEventListener("webglcontextrestored",onRestored);
@@ -365,8 +366,7 @@ export default function TerrainBackground() {
         window.removeEventListener("touchend",touchEnd);
         window.removeEventListener("touchcancel",touchEnd);
         document.removeEventListener("visibilitychange",visibility);
-        theme.removeEventListener("change",onThemeChange);
-        window.removeEventListener("alife-theme-change",onThemeChange);
+        themeObserver.disconnect();
         reduced.removeEventListener("change",schedule);
         canvas.removeEventListener("webglcontextlost",onLost);
         canvas.removeEventListener("webglcontextrestored",onRestored);

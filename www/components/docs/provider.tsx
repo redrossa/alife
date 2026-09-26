@@ -6,8 +6,8 @@ import type { ReactNode } from "react";
 export function DocsProvider({ children }: { children: ReactNode }) {
   return (
     <RootProvider
-      // The site's own theme controller (`alife-theme` + `data-theme`) owns
-      // theming; Fumadocs' `next-themes` provider must not compete with it.
+      // The root layout's next-themes provider (see `components/theme-provider.tsx`)
+      // owns theming, so Fumadocs must not mount a second one.
       theme={{ enabled: false }}
     >
       {children}

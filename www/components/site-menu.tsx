@@ -1,32 +1,52 @@
 "use client";
 
-import { BookText, Menu, Newspaper, X } from "lucide-react";
+import { BookText, Menu, Newspaper } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
+import { useRef, useState } from "react";
 
-import { ThemeIcon, useTheme } from "@/app/theme-toggle";
 import { GitHubLogo } from "@/components/logos";
+import { ThemeIcon } from "@/components/mode-toggle";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { siteRepository } from "@/lib/site";
 
-const item =
-  "flex min-h-11 w-full cursor-pointer items-center gap-2.5 rounded-sm px-3 text-start text-sm font-medium no-underline hover:bg-surface-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground";
+/*
+ * Menu rows are Buttons: each one is an action that closes the sheet, whether
+ * it navigates (Link), opens the repository, or toggles the theme. `ghost`
+ * supplies the row hover surface; only layout is overridden — the row spans the
+ * list and starts from the left, at the site's 44px touch target.
+ */
+const item = "h-11 w-full justify-start";
 
 /*
  * Mobile-only site navigation. Below `md` the header's links and utility
- * buttons collapse behind this menu button. Docs pages are the exception:
- * there the standalone site header is hidden below `md` and navigation lives
- * in the Fumadocs sidebar drawer instead (see `docs-sidebar-nav.tsx`).
+ * buttons collapse behind this menu button, which opens a full-height Sheet.
+ * Docs pages are the exception: there the standalone site header is hidden
+ * below `md` and navigation lives in the Fumadocs sidebar drawer instead (see
+ * `docs-sidebar-nav.tsx`).
+ *
+ * The Sheet brings the modal behavior the previous inline panel hand-rolled:
+ * Escape, outside press, scroll lock, focus containment and focus return, plus
+ * the enter/exit animation. `md:hidden` retires the sheet if the viewport grows
+ * past `md` while it is open.
  */
 export default function SiteMenu() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
-  const { theme, label, toggle } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  const contentRef = useRef<HTMLDivElement>(null);
+  const close = () => setOpen(false);
 
   // Navigating from one page to another inside a layout that keeps the
-  // header mounted (for example blog index → post) must not leave the menu
+  // header mounted (for example blog index → post) must not leave the sheet
   // open on top of the next page. Compare against the previous pathname
   // during render rather than resetting in an effect.
   const [menuPathname, setMenuPathname] = useState(pathname);
@@ -35,87 +55,80 @@ export default function SiteMenu() {
     setOpen(false);
   }
 
-  useEffect(() => {
-    if (!open) return;
-    function closeOnEscape(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
-    }
-    function closeOnOutsidePress(event: PointerEvent) {
-      const target = event.target as Node;
-      if (
-        !panelRef.current?.contains(target) &&
-        !buttonRef.current?.contains(target)
-      ) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("keydown", closeOnEscape);
-    document.addEventListener("pointerdown", closeOnOutsidePress);
-    return () => {
-      document.removeEventListener("keydown", closeOnEscape);
-      document.removeEventListener("pointerdown", closeOnOutsidePress);
-    };
-  }, [open]);
-
   return (
-    <>
-      <button
-        ref={buttonRef}
-        type="button"
-        className="inline-flex size-11 cursor-pointer items-center justify-center hover:text-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground md:hidden"
-        aria-label={open ? "Close navigation menu" : "Open navigation menu"}
-        aria-expanded={open}
-        aria-controls="site-header-menu"
-        onClick={() => setOpen((value) => !value)}
-      >
-        {open ? (
-          <X className="size-5" aria-hidden="true" />
-        ) : (
-          <Menu className="size-5" aria-hidden="true" />
-        )}
-      </button>
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="size-11 md:hidden"
+          aria-label="Open navigation menu"
+        >
+          <Menu aria-hidden="true" />
+        </Button>
+      </SheetTrigger>
 
-      <div
-        ref={panelRef}
-        id="site-header-menu"
-        className={`absolute inset-x-0 top-full z-50 flex-col rounded-sm border border-rule bg-background p-1.5 shadow-lg md:hidden ${
-          open ? "flex" : "hidden"
-        }`}
+      {/* The Sheet's shipped geometry, only steered to the right edge so the
+          site menu and the docs drawer open from the same side. `md:hidden`
+          retires it if the viewport grows past `md` while it is open. */}
+      <SheetContent
+        ref={contentRef}
+        side="right"
+        className="md:hidden"
+        onOpenAutoFocus={(event) => {
+          /* Open with focus on the close button rather than the Sheet's
+             default target (its last focusable child, the theme row). Tab
+             then walks the list from the top: Docs, Blog, GitHub, Theme. */
+          event.preventDefault();
+          contentRef.current
+            ?.querySelector<HTMLElement>('[data-slot="sheet-close"]')
+            ?.focus();
+        }}
       >
-        <nav className="flex flex-col" aria-label="Site">
-          <Link className={item} href="/docs" onClick={() => setOpen(false)}>
-            <BookText className="size-4 shrink-0" aria-hidden="true" />
-            Docs
-          </Link>
-          <Link className={item} href="/blog" onClick={() => setOpen(false)}>
-            <Newspaper className="size-4 shrink-0" aria-hidden="true" />
-            Blog
-          </Link>
-        </nav>
-        <div className="my-1.5 border-t border-rule" aria-hidden="true" />
-        <nav className="flex flex-col" aria-label="Site utilities">
-          <a
-            className={item}
-            href={siteRepository}
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => setOpen(false)}
-          >
-            <GitHubLogo className="size-4 shrink-0" aria-hidden="true" />
-            GitHub
-          </a>
-          <button
+        {/* The trigger already names the action; this names the dialog. */}
+        <SheetHeader>
+          <SheetTitle className="sr-only">Site navigation</SheetTitle>
+        </SheetHeader>
+
+        {/* One list in the normal flow, matching the docs drawer's nav: GitHub
+            and the theme switch sit with the site links rather than in a
+            footer pinned to the bottom. `px-4 pb-4` lines the rows up with the
+            Sheet's own `p-4` header. */}
+        <nav className="flex flex-col px-4 pb-4" aria-label="Site navigation">
+          <Button asChild variant="ghost" className={item}>
+            <Link href="/docs" onClick={close}>
+              <BookText aria-hidden="true" />
+              Docs
+            </Link>
+          </Button>
+          <Button asChild variant="ghost" className={item}>
+            <Link href="/blog" onClick={close}>
+              <Newspaper aria-hidden="true" />
+              Blog
+            </Link>
+          </Button>
+          <Button asChild variant="ghost" className={item}>
+            <a
+              href={siteRepository}
+              target="_blank"
+              rel="noreferrer"
+              onClick={close}
+            >
+              <GitHubLogo aria-hidden="true" />
+              GitHub
+            </a>
+          </Button>
+          <Button
             type="button"
+            variant="ghost"
             className={item}
-            onClick={toggle}
-            aria-label={label}
-            title={label}
+            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
           >
-            <ThemeIcon theme={theme} className="size-4 shrink-0" aria-hidden="true" />
+            <ThemeIcon />
             Theme
-          </button>
+          </Button>
         </nav>
-      </div>
-    </>
+      </SheetContent>
+    </Sheet>
   );
 }

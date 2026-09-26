@@ -18,7 +18,7 @@ export default function BlogRootLayout({ children }: LayoutProps<"/blog">) {
         {children}
       </main>
 
-      <footer className="site-nav-container flex justify-center py-7 text-sm text-muted sm:justify-end">
+      <footer className="site-nav-container flex justify-center py-7 text-sm text-muted-foreground sm:justify-end">
         <p>Alife © 2026</p>
       </footer>
 
