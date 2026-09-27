@@ -5,6 +5,8 @@
 - `docs/` owns project concepts, architecture, and other published documentation.
 - `www/` is the Next.js website and documentation app; read `www/AGENTS.md`
   before changing it.
+- `runtime/` is the experiment runtime, an independent Node.js package; read
+  `runtime/AGENTS.md` before changing it.
 - `assets/` contains source artwork and generators. Only `www/public/` assets
   are served by the website.
 - Keep the root `README.md` welcoming: branding, a concise project pitch, and
@@ -13,8 +15,8 @@
 
 ## Development
 
-- Use npm and keep both lockfiles in sync with their respective packages.
-  The root package provides Git hook tooling; `www/` is a separate app package.
+- Use npm and keep each lockfile in sync with its package. The root package
+  provides Git hook tooling; `www/` and `runtime/` are separate packages.
 - Run `npm ci` at the repository root to install Husky and commitlint hooks.
   Use Conventional Commits, for example `docs: update introduction` or
   `feat(www): add search`.
@@ -27,5 +29,7 @@
 ## Verification
 
 For website or MDX changes, run `npm run lint` and `npm run build` from `www/`.
+For runtime changes, run `npm run typecheck`, `npm run lint`, and `npm test`
+from `runtime/`.
 For UI changes, also check affected pages, mobile layout, and both color themes.
 Report checks that could not be completed rather than claiming they passed.

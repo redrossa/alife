@@ -25,13 +25,18 @@ exploring the conditions that could make that possible, not scripting the outcom
 
 **[Explore the website →](https://alife.sh)** · **[Read the docs →](https://alife.sh/docs)**
 
-This repository currently contains the website and documentation.
+This repository contains the website, the documentation, and an experimental
+runtime. The runtime supports bounded, supervised runs with a scripted mind;
+its Anthropic integration passes offline verification, with real-API validation
+and the first live smoke test still pending.
 
 ## Working in this repository
 
 - `docs/` — documentation source (MDX) and sidebar ordering (`meta.json`).
 - `www/` — the Next.js app that serves the website and documentation.
 - `assets/` — source artwork and asset-generation tools; served assets live in `www/public/`.
+- `runtime/` — the experimental runtime; see [runtime/README.md](runtime/README.md).
+- `.plans/` — reviewed engineering contracts and verification history; see [.plans/README.md](.plans/README.md).
 
 Edit documentation directly in `docs/`; the development server picks up changes.
 See [www/README.md](www/README.md) for app setup, checks, and production builds.
@@ -47,8 +52,8 @@ feat(www): add documentation search
 fix(www): correct theme switching
 ```
 
-The root npm package is only for repository tooling; install the website's
-dependencies separately in `www/`.
+The root npm package is only for repository tooling; install the website's and
+the runtime's dependencies separately in `www/` and `runtime/`.
 
 ## License
 

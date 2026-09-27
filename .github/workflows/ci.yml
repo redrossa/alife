@@ -1,0 +1,120 @@
+name: CI
+
+# Always report the final required check. Filtering the whole workflow would
+# leave a required check pending on PRs that only change unrelated paths.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  HUSKY: "0"
+
+jobs:
+  changes:
+    name: Detect changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      runtime: ${{ steps.paths.outputs.runtime }}
+      website: ${{ steps.paths.outputs.website }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Test CI helpers
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+      - name: Select checks
+        id: paths
+        run: python3 .github/scripts/changes.py
+
+  runtime:
+    name: Runtime offline
+    needs: changes
+    if: needs.changes.outputs.runtime == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: runtime
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.14.0
+          cache: npm
+          cache-dependency-path: runtime/package-lock.json
+      - name: Verify frozen acceptance hashes
+        run: python3 ../.github/scripts/verify_acceptance.py
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - run: node dist/cli.js config validate test/fixtures/fake.config.json
+      - run: npm run measure:packing
+
+  website:
+    name: Website
+    needs: changes
+    if: needs.changes.outputs.website == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+    defaults:
+      run:
+        working-directory: www
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.14.0
+          cache: npm
+          cache-dependency-path: www/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+
+  required-checks:
+    name: Required checks
+    if: always()
+    needs: [changes, runtime, website]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require every selected check to pass
+        env:
+          CHANGES_RESULT: ${{ needs.changes.result }}
+          RUNTIME_SELECTED: ${{ needs.changes.outputs.runtime }}
+          RUNTIME_RESULT: ${{ needs.runtime.result }}
+          WEBSITE_SELECTED: ${{ needs.changes.outputs.website }}
+          WEBSITE_RESULT: ${{ needs.website.result }}
+        run: |
+          python3 - <<'PY'
+          import os
+          if os.environ['CHANGES_RESULT'] != 'success':
+              raise SystemExit('Change detection did not succeed')
+          for job in ('RUNTIME', 'WEBSITE'):
+              selected = os.environ[job + '_SELECTED']
+              result = os.environ[job + '_RESULT']
+              if selected not in ('true', 'false'):
+                  raise SystemExit(f'{job}: invalid selection')
+              expected = 'success' if selected == 'true' else 'skipped'
+              if result != expected:
+                  raise SystemExit(f'{job}: expected {expected}, got {result}')
+              print(f'{job}: {result}')
+          PY

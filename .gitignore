@@ -1,7 +1,38 @@
 # Repository tooling
 /node_modules/
 
+# Local Python caches (CI helpers and standalone probes)
+__pycache__/
+*.pyc
+
 # macOS metadata (including files outside www/)
 .DS_Store
 .vercel
 .env*
+
+# Reviewed engineering contracts and verification only. New planning notes are
+# private by default; review before adding another allowlist entry.
+/.plans/*
+!/.plans/README.md
+!/.plans/first-runnable-system.md
+!/.plans/phase-1-implementation-findings.md
+!/.plans/phase-2-implementation-handoff.md
+!/.plans/phase-2-implementation-results.md
+!/.plans/phase-2-verification-findings.md
+!/.plans/phase-3-final-lifecycle-tdd-plan.md
+!/.plans/phase-3-implementation-results.md
+!/.plans/phase-3-lifecycle-uncertainty-implementation-plan.md
+!/.plans/phase-3-policy-decisions.md
+!/.plans/phase-3-policy-verification.md
+!/.plans/phase-3-verification-findings.md
+!/.plans/phase-4-acceptance-manifest.json
+!/.plans/phase-4-handback-verification.md
+!/.plans/phase-4-implementation-results.md
+!/.plans/phase-4-tdd-implementation-plan.md
+!/.plans/phase-4-tdd-verification.md
+!/.plans/phase-5-acceptance-manifest.json
+!/.plans/phase-5-handback-verification.md
+!/.plans/phase-5-implementation-results.md
+!/.plans/phase-5-policy-decisions.md
+!/.plans/phase-5-tdd-implementation-plan.md
+!/.plans/phase-5-tdd-verification.md

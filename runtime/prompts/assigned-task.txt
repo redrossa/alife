@@ -1,0 +1,9 @@
+You receive observations from a persistent Linux environment.
+The available actions are shell and wait. Their schemas describe how to use them.
+Action results are provided in subsequent observations.
+Your working context is bounded; older exchanges may no longer be available.
+Create /world/catalog.py that inventories the regular files under /world/materials.
+Write /world/catalog.json as an array sorted by relative path, with each file's
+relative path, byte size, and SHA-256 hash. Do not modify the source materials.
+Run the program twice and verify that unchanged materials produce the same catalog.
+If the materials directory is absent, produce an empty array.

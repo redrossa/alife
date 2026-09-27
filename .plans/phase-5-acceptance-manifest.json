@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "frozenAt": "2026-09-27T12:37:05.884093+00:00",
+  "purpose": "Phase 5 fixed offline acceptance gate. Changes require explicit contract review; implementation must not weaken tests.",
+  "environment": { "node": "24.14.0", "platform": "darwin/arm64" },
+  "offline": {
+    "tests": 159, "suites": 4, "fixtureControlsPassed": 6, "expectedRedFailures": 153,
+    "targetedRepetitions": 3, "legacyTests": 468, "fullTests": 627,
+    "fullSuites": 71, "fullPassed": 474, "fullExpectedFailures": 153
+  },
+  "live": {
+    "executed": false, "campaignLimitMicroUsd": 100000000,
+    "probe": { "maximumCalls": 3, "maximumSeconds": 1800, "maximumCostMicroUsd": 20000000 },
+    "managedSmoke": { "maximumCalls": 6, "maximumSeconds": 3600, "maximumCostMicroUsd": 40000000 },
+    "requiresExplicitCredentialSetup": true, "dockerPrivilegeAuthorizationSeparate": true
+  },
+  "files": [
+    { "path": "runtime/test/support/phase5-campaign-child.ts", "bytes": 668, "sha256": "a8c36c55298985f52eccdf171e06986fe00a4df378b24a285f30c049be74ce3e" },
+    { "path": "runtime/test/support/phase5-campaign.ts", "bytes": 3629, "sha256": "dc954e52307093ca438ff2a62294c7a329c1101af293b20eaddb4daed3ec9a9d" },
+    { "path": "runtime/test/support/phase5-contract.ts", "bytes": 5303, "sha256": "2863977c040ed9258b5fb6f45f2a7c2a7e01779d6a9c2453c88732e331ff7de5" },
+    { "path": "runtime/test/support/phase5-run.ts", "bytes": 5938, "sha256": "5004b27f7316b1299888063d15c806d78ec752b47d79238b9711d23fdebc1231" },
+    { "path": "runtime/test/unit/phase5-anthropic.acceptance.test.ts", "bytes": 23997, "sha256": "e848fe1583503e56c616581829e6c4846a9b016e714183ef4be5dd395911691d" },
+    { "path": "runtime/test/unit/phase5-campaign.acceptance.test.ts", "bytes": 17587, "sha256": "711d61e8944c69f0471989f77a55a3dfc11cfee79637a18fe70d27e8ecf68d48" },
+    { "path": "runtime/test/unit/phase5-cli.acceptance.test.ts", "bytes": 3454, "sha256": "92a71b440030f3da36f4c82dacfb49e64285914d2632b777d036565815f86304" },
+    { "path": "runtime/test/unit/phase5-config.acceptance.test.ts", "bytes": 7238, "sha256": "d52e9b8e81cb5279148d93667c91bbac81b176935789a0e6aa480401fdf533ab" },
+    { "path": "runtime/test/unit/phase5-context.acceptance.test.ts", "bytes": 8277, "sha256": "4ffacd07c3368a811033460c042cf91c69e6ef475b4db809ef2bab72e5feb82b" },
+    { "path": "runtime/test/unit/phase5-run.acceptance.test.ts", "bytes": 21384, "sha256": "ea19c2cc6d196fee170e758581645f465c68f0ac8361ccf7b99613740b3ae911" }
+  ],
+  "unchangedPriorGate": [
+    { "path": "runtime/test/integration/phase4.acceptance.test.ts", "sha256": "9fbf119d58dcb794829f7a9568a384dee6563025507582448f6d6da9251fd288" },
+    { "path": "runtime/test/support/phase4-artifacts.ts", "sha256": "f36f272a33401e073b9f8eec6db2042882ef3841dc3eac64d10f3b5d6273da26" },
+    { "path": "runtime/test/support/phase4-controller-child.ts", "sha256": "b873bbe21eebc289157e5484dc8b2ebb842ace83617320a143a74b613df6215b" },
+    { "path": "runtime/test/support/phase4-managed-child.ts", "sha256": "76ba139230d3a48298c2a30c606a441412fd8994c709acd3c9ea673eed0c5c22" },
+    { "path": "runtime/test/support/phase4-managed.ts", "sha256": "f951ff3fd8ce6d898b5c1a0e7ab5f859d2f5d513a1d4b79000c83ca5703f7031" },
+    { "path": "runtime/test/support/phase4-watchdog.ts", "sha256": "61088e167a40a510b30fbde9a2468011bb5133aa3b492383305a1b7c33e38437" },
+    { "path": "runtime/test/unit/phase4-artifacts.acceptance.test.ts", "sha256": "829313802cae2776e5833874dd38126939f16431402549a7a130d6a2c6b39d79" },
+    { "path": "runtime/test/unit/phase4-control.acceptance.test.ts", "sha256": "2cfc3dc2b32c76609d9176396f419a38bcb8f526d67a7cccbb1de25a8c17ca95" },
+    { "path": "runtime/test/unit/phase4-evidence.acceptance.test.ts", "sha256": "62a2c8245d034360af01b3a9c6b2bd5ef13b77967fd2c7f1d3ca220f8cea3f10" },
+    { "path": "runtime/test/unit/phase4-managed.acceptance.test.ts", "sha256": "b9a81df76eef81aa5e21f5c8d868917cb9e0942855d8e8a70cd5e27ef1cac3c7" },
+    { "path": "runtime/test/unit/phase4-resume.acceptance.test.ts", "sha256": "7a7216570f466285706a205a63d21ade2c28b5f8471048e5694ebc186aaab9b5" },
+    { "path": "runtime/test/unit/phase4-watchdog-process.acceptance.test.ts", "sha256": "04c86e80c702d5f91c26693d2c0545ca414f20a4cf8983a23b848cd40ae8fcbb" },
+    { "path": "runtime/test/unit/phase4-watchdog.acceptance.test.ts", "sha256": "7bedd276526a73f5d95d1550685a937651de29a4aede2b083f40924af4692e41" },
+    { "path": "runtime/test/unit/signal-shutdown.acceptance.test.ts", "sha256": "308a21ddd24928137036e05dcc616049152a416dbafa6e121a1f787e343545d1" },
+    { "path": "runtime/test/unit/epoch-restart.acceptance.test.ts", "sha256": "9a31ffb70787a73d76e215520182c783bd454cc916bad454c25fed4693b9f709" }
+  ],
+  "evidence": [
+    { "path": "/tmp/alife-phase5-frozen-red-1.log", "sha256": "69c9622e245ec815a20b36f4a57d875af5ce13027fbf3694230a19959901be11" },
+    { "path": "/tmp/alife-phase5-frozen-red-2.log", "sha256": "1627227637c243422d88ff9b9b85b3a75decb195eb2a13c5d4e970b2a3c3d6e3" },
+    { "path": "/tmp/alife-phase5-frozen-red-3.log", "sha256": "35d92d197b6a7d8430e2b794886ba05795090848d2d05459281ade446ffa5fd0" },
+    { "path": "/tmp/alife-phase5-frozen-full-red.log", "sha256": "1e805b11805eb08f6b244b1eb15271cf965d7262e70315ea115f874e8637ef6a" },
+    { "path": "/tmp/alife-phase5-typecheck.log", "sha256": "328ab720949fc12d752e2a0ccb4e539e7dac5fd8a76d3fdac0ca67e32f1d4477" },
+    { "path": "/tmp/alife-phase5-lint.log", "sha256": "76118f9f32920ed103f3b58ab62809b0b0701ffc6e8dc8323900c3724c0cc907" },
+    { "path": "/tmp/alife-phase5-build.log", "sha256": "ec70c986e753ca51887b719a8fb7770a4370c922224a7af616082f0bf17fa779" },
+    { "path": "/tmp/alife-phase5-config.log", "sha256": "6ee2b83fdab0fef73bc7a8c308fe7dc682d918e71bac028a46524ca97bf9a820" },
+    { "path": "/tmp/alife-phase5-packing.log", "sha256": "455fe54a424d512955a062d6e8160af5bc3089d1740d8a3173f3c55e33daa972" }
+  ]
+}

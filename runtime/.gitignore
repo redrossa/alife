@@ -1,0 +1,7 @@
+/node_modules/
+/dist/
+*.tsbuildinfo
+
+# Only the reviewed historical Phase 0 snapshot is a publication candidate.
+/spikes/phase0/results/*
+!/spikes/phase0/results/20260925161449-5d99.json
