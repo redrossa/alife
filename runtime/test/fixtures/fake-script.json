@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "turns": [
+    {
+      "type": "shell",
+      "command": "echo hello > note.txt"
+    },
+    {
+      "type": "wait"
+    },
+    {
+      "type": "text",
+      "text": "Looking around."
+    },
+    {
+      "type": "refusal",
+      "text": "No."
+    },
+    {
+      "type": "calls",
+      "calls": [
+        {
+          "name": "shell",
+          "arguments": "{\"command\":\"ls\"}"
+        },
+        {
+          "name": "wait",
+          "arguments": "{}"
+        }
+      ]
+    },
+    {
+      "type": "failure",
+      "kind": "timeout",
+      "processed": "unknown"
+    }
+  ]
+}

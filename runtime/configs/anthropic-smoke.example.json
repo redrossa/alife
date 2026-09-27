@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 2,
+  "world": {
+    "image": "REPLACE_WITH_PINNED_IMAGE_DIGEST",
+    "container": "restricted-container-v1",
+    "storage": {
+      "profile": "loop-ext4-volume-v1",
+      "helperImage": "REPLACE_WITH_PINNED_HELPER_IMAGE_DIGEST",
+      "capacityMiB": 128,
+      "inodes": 4096,
+      "capture": "tar-capture-v1"
+    },
+    "memoryMiB": 256,
+    "swapMiB": 0,
+    "cpus": 0.5,
+    "pids": 64,
+    "fileDescriptors": 256,
+    "tmpMiB": 16,
+    "shmMiB": 8,
+    "network": "none",
+    "ipc": "private-no-mqueue-v1",
+    "logging": "none",
+    "uid": 1000,
+    "gid": 1000,
+    "seed": "empty-v1"
+  },
+  "body": {
+    "profile": "shell-body-v5",
+    "sensors": "baseline-sensors-v4",
+    "minimumTickIntervalMs": 1000,
+    "actionWaitMs": 10000,
+    "jobPolicy": "continuing-jobs-v4",
+    "maximumConcurrentJobs": 4,
+    "retainedFinishedJobs": 32,
+    "maximumCommandBytes": 8192,
+    "capturedOutputBytes": 65536,
+    "perceivedOutputBytes": 8192,
+    "outputTruncation": "head-v1",
+    "contextBudgetTokens": 1000000,
+    "contextMarginTokens": 512,
+    "tokenEstimator": "anthropic-wire-bound-v1",
+    "exposeContextUsage": true,
+    "contextPolicy": "recent-complete-exchanges-v3",
+    "prompt": "../prompts/baseline.txt"
+  },
+  "mind": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "credentialEnv": "ALIFE_ANTHROPIC_API_KEY",
+    "maximumOutputTokens": 128000,
+    "requestTimeoutMs": 600000,
+    "retryProfile": "none-v1",
+    "reasoningEffort": "high",
+    "costBound": {
+      "inputUsdPerMillionTokens": 4,
+      "outputUsdPerMillionTokens": 20,
+      "source": "REPLACE_WITH_VERIFIED_PRICING_REFERENCE (standard uncached Opus 5.5 rates, checked on the date below)",
+      "verifiedOn": null
+    }
+  },
+  "operator": {
+    "maximumTicks": 6,
+    "maximumRunSeconds": 3600,
+    "maximumEstimatedCostUsd": 40,
+    "recordLimitMiB": 256,
+    "minimumHostFreeMiB": 2048,
+    "maximumConsecutiveProtocolErrors": 5,
+    "watchdogLeaseSeconds": 900,
+    "heartbeatIntervalSeconds": 60,
+    "campaignDirectory": "/REPLACE_WITH_ABSOLUTE_CAMPAIGN_DIRECTORY"
+  }
+}

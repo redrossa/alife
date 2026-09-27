@@ -1,0 +1,1378 @@
+{
+  "schema": "alife.phase0.probe/1",
+  "runId": "20260925161449-5d99",
+  "started": "2026-09-25T16:14:49.930Z",
+  "finished": "2026-09-25T16:15:34.730Z",
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "node": "v25.8.1"
+  },
+  "flags": {
+    "privilegedHelper": true,
+    "engineRestart": true
+  },
+  "profile": {
+    "uid": 1000,
+    "gid": 1000,
+    "capacityMiB": 128,
+    "inodes": 4096,
+    "memoryMiB": 256,
+    "cpus": 0.5,
+    "pids": 64,
+    "nofile": 256,
+    "tmpMiB": 16,
+    "shmMiB": 8,
+    "drainMs": 1000,
+    "captureBytes": 65536,
+    "archiveLimitBytes": 268435456
+  },
+  "facts": {
+    "image.alife-p0-world:dev": {
+      "id": "sha256:a64bbce7bf8c9fe8b3d1d950e213b612e494c1d2b2f470b42ccce327208f40c8",
+      "architecture": "arm64",
+      "os": "linux"
+    },
+    "image.alife-p0-tools:dev": {
+      "id": "sha256:f14c5e4d0776d6adeb206b6c5324a6cf4aaffacc52a95353c525d76444af21a3",
+      "architecture": "arm64",
+      "os": "linux"
+    },
+    "docker.context": {
+      "name": "orbstack",
+      "endpoint": "unix://~/.orbstack/run/docker.sock",
+      "description": "OrbStack"
+    },
+    "engine": {
+      "id": "ebf1ee81-aefd-482e-a2f4-80b1201cc57e",
+      "name": "orbstack",
+      "operatingSystem": "OrbStack",
+      "serverVersion": "29.4.0",
+      "apiVersion": "1.54",
+      "clientVersion": "29.4.0",
+      "kernel": "7.0.14-orbstack-00380-ga7e0a2dc9535",
+      "architecture": "aarch64",
+      "ncpu": 12,
+      "memTotal": 12599844864,
+      "storageDriver": "overlayfs",
+      "driverStatus": [
+        [
+          "driver-type",
+          "io.containerd.snapshotter.v1"
+        ]
+      ],
+      "dockerRootDir": "/var/lib/docker",
+      "cgroupDriver": "cgroupfs",
+      "cgroupVersion": "2",
+      "securityOptions": [
+        "name=seccomp,profile=builtin",
+        "name=cgroupns"
+      ],
+      "defaultRuntime": "runc",
+      "initBinary": "docker-init",
+      "loggingDriver": "json-file",
+      "volumePlugins": [
+        "local"
+      ],
+      "limits": {
+        "memory": true,
+        "swap": true,
+        "cpuCfsQuota": true,
+        "pids": true,
+        "oomKillDisable": false
+      }
+    },
+    "orbstack.version": "Version: 2.2.3 (2020300)",
+    "orbstack.config": {
+      "cpu": "12",
+      "machine.docker.isolated": "false",
+      "machine.docker.mounts": "",
+      "memory_mib": "12288",
+      "mount_hide_shared": "false",
+      "power.pause_in_sleep": "true"
+    },
+    "engine.volumeFilesystem": "/dev/vdb1 /v btrfs rw,noatime,nodatasum,nodatacow,ssd,discard,space_cache=v2,subvolid=256,subvol=/docker 0 0\n/dev/vdb1      173015040 9760624 163254416   6% /v",
+    "storage.requested": {
+      "capacityMiB": 128,
+      "inodes": 4096
+    },
+    "storage.superblock.initial": {
+      "Filesystem volume name": "alife-p0-world",
+      "Last mounted on": "<not available>",
+      "Filesystem UUID": "77b473f5-63cc-480d-b00a-6bbd99f98e10",
+      "Filesystem magic number": "0xEF53",
+      "Filesystem revision #": "1 (dynamic)",
+      "Filesystem features": "has_journal ext_attr resize_inode dir_index orphan_file filetype extent 64bit flex_bg metadata_csum_seed sparse_super large_file huge_file dir_nlink extra_isize metadata_csum",
+      "Filesystem flags": "unsigned_directory_hash",
+      "Default mount options": "user_xattr acl",
+      "Filesystem state": "clean",
+      "Errors behavior": "Continue",
+      "Filesystem OS type": "Linux",
+      "Inode count": "4096",
+      "Block count": "32768",
+      "Reserved block count": "0",
+      "Overhead clusters": "1299",
+      "Free blocks": "31431",
+      "Free inodes": "4084",
+      "First block": "0",
+      "Block size": "4096",
+      "Fragment size": "4096",
+      "Group descriptor size": "64",
+      "Reserved GDT blocks": "15",
+      "Blocks per group": "32768",
+      "Fragments per group": "32768",
+      "Inodes per group": "4096",
+      "Inode blocks per group": "256",
+      "Flex block group size": "16",
+      "Filesystem created": "Fri Sep 25 16:14:52 2026",
+      "Last mount time": "n/a",
+      "Last write time": "Fri Sep 25 16:14:52 2026",
+      "Mount count": "0",
+      "Maximum mount count": "-1",
+      "Last checked": "Fri Sep 25 16:14:52 2026",
+      "Check interval": "0 (<none>)",
+      "Lifetime writes": "205 kB",
+      "Reserved blocks uid": "0 (user root)",
+      "Reserved blocks gid": "0 (group root)",
+      "First inode": "11",
+      "Inode size": "256",
+      "Required extra isize": "32",
+      "Desired extra isize": "32",
+      "Journal inode": "8",
+      "Default directory hash": "half_md4",
+      "Directory Hash Seed": "71240dbf-a156-451b-84df-9fa5e0fd19fc",
+      "Journal backup": "inode blocks",
+      "Checksum type": "crc32c",
+      "Checksum": "0x409c5674",
+      "Checksum seed": "0xe57f6890",
+      "Orphan file inode": "12",
+      "Journal features": "(none)",
+      "Total journal size": "4096k",
+      "Total journal blocks": "1024",
+      "Max transaction length": "1024",
+      "Fast commit length": "0",
+      "Journal sequence": "0x00000001",
+      "Journal start": "0"
+    },
+    "storage.attach": {
+      "device": "/dev/loop0",
+      "uuid": "77b473f5-63cc-480d-b00a-6bbd99f98e10",
+      "type": "ext4"
+    },
+    "world.effectiveConfig": {
+      "user": "1000:1000",
+      "readonlyRootfs": true,
+      "privileged": false,
+      "capAdd": null,
+      "capDrop": [
+        "ALL"
+      ],
+      "securityOpt": [
+        "no-new-privileges"
+      ],
+      "networkMode": "none",
+      "portBindings": {},
+      "publishAllPorts": false,
+      "pidMode": "",
+      "ipcMode": "private",
+      "memory": 268435456,
+      "memorySwap": 268435456,
+      "nanoCpus": 500000000,
+      "pidsLimit": 64,
+      "ulimits": [
+        {
+          "Name": "nofile",
+          "Hard": 256,
+          "Soft": 256
+        }
+      ],
+      "tmpfs": {
+        "/tmp": "rw,nosuid,nodev,size=16m,mode=1777"
+      },
+      "shmSize": 8388608,
+      "logConfig": {
+        "Type": "none",
+        "Config": {}
+      },
+      "logPath": "",
+      "restartPolicy": {
+        "Name": "no",
+        "MaximumRetryCount": 0
+      },
+      "autoRemove": false,
+      "init": true,
+      "devices": [],
+      "binds": null,
+      "mounts": [
+        {
+          "type": "volume",
+          "name": "alife-p0-20260925161449-5d99-world",
+          "destination": "/world",
+          "rw": true,
+          "driver": "local"
+        }
+      ],
+      "appArmorProfile": ""
+    },
+    "world.observed": {
+      "uid": 1000,
+      "gid": 1000,
+      "groups": [
+        1000
+      ],
+      "status": {
+        "CapInh": "0000000000000000",
+        "CapPrm": "0000000000000000",
+        "CapEff": "0000000000000000",
+        "CapBnd": "0000000000000000",
+        "CapAmb": "0000000000000000",
+        "NoNewPrivs": "1",
+        "Seccomp": "2"
+      },
+      "mounts": [
+        {
+          "mountpoint": "/",
+          "opts": "ro,relatime",
+          "fstype": "overlay",
+          "source": "overlay",
+          "superopts": "rw,lowerdir=/var/lib/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/823/fs:/var/lib/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/633/fs:/var/lib/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/589/fs,upperdir=/var/lib/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/824/fs,workdir=/var/lib/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/824/work"
+        },
+        {
+          "mountpoint": "/proc",
+          "opts": "rw,nosuid,nodev,noexec,relatime",
+          "fstype": "proc",
+          "source": "proc",
+          "superopts": "rw"
+        },
+        {
+          "mountpoint": "/dev",
+          "opts": "rw,nosuid",
+          "fstype": "tmpfs",
+          "source": "tmpfs",
+          "superopts": "rw,size=65536k,mode=755"
+        },
+        {
+          "mountpoint": "/dev/pts",
+          "opts": "rw,nosuid,noexec,relatime",
+          "fstype": "devpts",
+          "source": "devpts",
+          "superopts": "rw,gid=5,mode=620,ptmxmode=666"
+        },
+        {
+          "mountpoint": "/sys",
+          "opts": "ro,nosuid,nodev,noexec,relatime",
+          "fstype": "sysfs",
+          "source": "sysfs",
+          "superopts": "ro"
+        },
+        {
+          "mountpoint": "/sys/fs/cgroup",
+          "opts": "ro,nosuid,nodev,noexec,relatime",
+          "fstype": "cgroup2",
+          "source": "cgroup",
+          "superopts": "rw,nsdelegate"
+        },
+        {
+          "mountpoint": "/dev/mqueue",
+          "opts": "rw,nosuid,nodev,noexec,relatime",
+          "fstype": "mqueue",
+          "source": "mqueue",
+          "superopts": "rw"
+        },
+        {
+          "mountpoint": "/dev/shm",
+          "opts": "rw,nosuid,nodev,noexec,relatime",
+          "fstype": "tmpfs",
+          "source": "shm",
+          "superopts": "rw,size=8192k"
+        },
+        {
+          "mountpoint": "/usr/sbin/docker-init",
+          "opts": "ro,noatime",
+          "fstype": "overlay",
+          "source": "orbstack",
+          "superopts": "rw,lowerdir=/,upperdir=/run/upper,workdir=/run/work,uuid=on"
+        },
+        {
+          "mountpoint": "/tmp",
+          "opts": "rw,nosuid,nodev,noexec,relatime",
+          "fstype": "tmpfs",
+          "source": "tmpfs",
+          "superopts": "rw,size=16384k"
+        },
+        {
+          "mountpoint": "/world",
+          "opts": "rw,nosuid,nodev,noatime",
+          "fstype": "ext4",
+          "source": "/dev/loop0",
+          "superopts": "rw"
+        },
+        {
+          "mountpoint": "/etc/resolv.conf",
+          "opts": "ro,noatime",
+          "fstype": "btrfs",
+          "source": "/dev/vdb1",
+          "superopts": "rw,nodatasum,nodatacow,ssd,discard,space_cache=v2,subvolid=256,subvol=/docker"
+        },
+        {
+          "mountpoint": "/etc/hostname",
+          "opts": "ro,noatime",
+          "fstype": "btrfs",
+          "source": "/dev/vdb1",
+          "superopts": "rw,nodatasum,nodatacow,ssd,discard,space_cache=v2,subvolid=256,subvol=/docker"
+        },
+        {
+          "mountpoint": "/etc/hosts",
+          "opts": "ro,noatime",
+          "fstype": "btrfs",
+          "source": "/dev/vdb1",
+          "superopts": "rw,nodatasum,nodatacow,ssd,discard,space_cache=v2,subvolid=256,subvol=/docker"
+        },
+        {
+          "mountpoint": "/proc/bus",
+          "opts": "ro,nosuid,nodev,noexec,relatime",
+          "fstype": "proc",
+          "source": "proc",
+          "superopts": "rw"
+        },
+        {
+          "mountpoint": "/proc/fs",
+          "opts": "ro,nosuid,nodev,noexec,relatime",
+          "fstype": "proc",
+          "source": "proc",
+          "superopts": "rw"
+        },
+        {
+          "mountpoint": "/proc/irq",
+          "opts": "ro,nosuid,nodev,noexec,relatime",
+          "fstype": "proc",
+          "source": "proc",
+          "superopts": "rw"
+        },
+        {
+          "mountpoint": "/proc/sys",
+          "opts": "ro,nosuid,nodev,noexec,relatime",
+          "fstype": "proc",
+          "source": "proc",
+          "superopts": "rw"
+        },
+        {
+          "mountpoint": "/proc/sysrq-trigger",
+          "opts": "ro,nosuid,nodev,noexec,relatime",
+          "fstype": "proc",
+          "source": "proc",
+          "superopts": "rw"
+        },
+        {
+          "mountpoint": "/proc/asound",
+          "opts": "ro,relatime",
+          "fstype": "tmpfs",
+          "source": "tmpfs",
+          "superopts": "ro,size=4k,nr_inodes=1"
+        },
+        {
+          "mountpoint": "/proc/interrupts",
+          "opts": "rw,nosuid",
+          "fstype": "tmpfs",
+          "source": "tmpfs",
+          "superopts": "rw,size=65536k,mode=755"
+        },
+        {
+          "mountpoint": "/proc/keys",
+          "opts": "rw,nosuid",
+          "fstype": "tmpfs",
+          "source": "tmpfs",
+          "superopts": "rw,size=65536k,mode=755"
+        },
+        {
+          "mountpoint": "/proc/timer_list",
+          "opts": "rw,nosuid",
+          "fstype": "tmpfs",
+          "source": "tmpfs",
+          "superopts": "rw,size=65536k,mode=755"
+        },
+        {
+          "mountpoint": "/sys/firmware",
+          "opts": "ro,relatime",
+          "fstype": "tmpfs",
+          "source": "tmpfs",
+          "superopts": "ro,size=4k,nr_inodes=1"
+        }
+      ],
+      "create": {
+        "/probe": "EROFS",
+        "/etc/probe": "EROFS",
+        "/usr/probe": "EROFS",
+        "/var/probe": "EROFS",
+        "/var/tmp/probe": "EROFS",
+        "/root/probe": "EACCES",
+        "/run/probe": "EROFS",
+        "/dev/probe": "EACCES",
+        "/home/probe": "EROFS",
+        "/world/.probe": "ok",
+        "/tmp/.probe": "ok",
+        "/dev/shm/.probe": "ok",
+        "/dev/mqueue/probe": "ok"
+      },
+      "openw": {
+        "/etc/hosts": "EACCES",
+        "/etc/resolv.conf": "EACCES",
+        "/etc/hostname": "EACCES",
+        "/etc/passwd": "EACCES"
+      },
+      "writable_outside_expected": [
+        "/dev/urandom",
+        "/dev/zero",
+        "/dev/tty",
+        "/dev/full",
+        "/dev/random",
+        "/dev/null",
+        "/dev/mqueue",
+        "/dev/pts/ptmx"
+      ],
+      "net_interfaces": [
+        "lo"
+      ],
+      "connect": {
+        "1.1.1.1:443": "ENETUNREACH",
+        "192.168.138.1:22": "ENETUNREACH",
+        "[2606:4700:4700::1111]:443": "ENETUNREACH"
+      },
+      "dns": "gaierror",
+      "docker_socket": [],
+      "env_keys": [
+        "HOME",
+        "HOSTNAME",
+        "LC_CTYPE",
+        "PATH"
+      ],
+      "cgroup": {
+        "memory.max": "268435456",
+        "memory.swap.max": "0",
+        "memory.high": "max",
+        "pids.max": "64",
+        "cpu.max": "50000 100000",
+        "io.max": ""
+      },
+      "rlimit_nofile": [
+        256,
+        256
+      ],
+      "rlimit_nproc": [
+        48184,
+        48184
+      ],
+      "dev": [
+        "fd",
+        "full",
+        "mqueue",
+        "null",
+        "ptmx",
+        "pts",
+        "random",
+        "shm",
+        "stderr",
+        "stdin",
+        "stdout",
+        "tty",
+        "urandom",
+        "zero"
+      ],
+      "hostname": "world"
+    },
+    "storage.agentVisible": {
+      "fsid": "4818bec71dc635fa",
+      "blocks": 31469,
+      "bfree": 31431,
+      "bavail": 30776,
+      "bsize": 4096,
+      "files": 4096,
+      "ffree": 4084,
+      "usableMiB": 120.21875,
+      "df": [
+        "/dev/loop0        125876   152    123104   1% /world",
+        "/dev/loop0       4096    12  4084    1% /world"
+      ]
+    },
+    "storage.exhaustion": {
+      "written": 125829120,
+      "afterAvailBlocks": 56,
+      "backing": {
+        "apparentKiB": 131072,
+        "allocatedKiB": 127272
+      }
+    },
+    "capture.archive": {
+      "bytes": 20480,
+      "sha256": "4e8c25703e292aa18d226a230313e8c0f6d26227a79085435b7f39b419b2257b",
+      "entries": 13,
+      "listing": [
+        "drwxr-xr-x  0 1000   1000        0 Sep 25 11:15 ./",
+        "-rw-r--r--  0 1000   1000       24 Sep 25 11:15 ./marker",
+        "lrwxrwxrwx  0 1000   1000        0 Sep 25 11:15 ./abs-link -> /etc/passwd",
+        "-rw-r--r--  0 1000   1000      319 Sep 25 11:15 ./bg.log",
+        "-rw-r--r--  0 1000   1000     8192 Sep 25 11:15 ./state.db",
+        "drwx------  0 0      0           0 Sep 25 11:14 ./lost+found/",
+        "lrwxrwxrwx  0 1000   1000        0 Sep 25 11:15 ./rel-link -> ../../../../etc",
+        "-rw-r--r--  0 1000   1000        1 Sep 25 11:15 ./esc\\033[31mname",
+        "prw-r--r--  0 1000   1000        0 Sep 25 11:15 ./fifo",
+        "d---------  0 1000   1000        0 Sep 25 11:15 ./deep/",
+        "drwxr-xr-x  0 1000   1000        0 Sep 25 11:15 ./deep/a/",
+        "drwxr-xr-x  0 1000   1000        0 Sep 25 11:15 ./deep/a/b/",
+        "drwxr-xr-x  0 1000   1000        0 Sep 25 11:15 ./deep/a/b/c/"
+      ]
+    }
+  },
+  "results": [
+    {
+      "id": "D1",
+      "area": "discovery",
+      "status": "info",
+      "title": "context orbstack → OrbStack 29.4.0 aarch64",
+      "detail": {
+        "engine": "ebf1ee81-aefd-482e-a2f4-80b1201cc57e"
+      }
+    },
+    {
+      "id": "D2",
+      "area": "discovery",
+      "status": "pass",
+      "title": "engine reports cgroup v2 memory/swap/pids/cpu limit support",
+      "detail": {
+        "cgroup": "2"
+      }
+    },
+    {
+      "id": "D3",
+      "area": "discovery",
+      "status": "pass",
+      "title": "engine reports seccomp",
+      "detail": {
+        "securityOptions": [
+          "name=seccomp,profile=builtin",
+          "name=cgroupns"
+        ]
+      }
+    },
+    {
+      "id": "D4",
+      "area": "storage",
+      "status": "info",
+      "title": "local volume driver cannot mount an image file with o=loop (kernel mount has no loop option); a loop device must be attached separately",
+      "detail": {
+        "stderr": "docker: Error response from daemon: error while mounting volume '/var/lib/docker/volumes/alife-p0-20260925161449-5d99-loopprobe/_data': failed to mount local volume: mount /var/lib/docker/volumes/alife-p0-20260925161449-5d99-loopprobe-backing/_data/img:/var/lib/docker/volumes/alife-p0-20260925161449"
+      }
+    },
+    {
+      "id": "S0",
+      "area": "storage",
+      "status": "info",
+      "title": "ext4 image provisioned unprivileged: 32768 × 4096 B blocks, 4096 inodes, journal 4096k, overhead 1299 blocks",
+      "detail": {}
+    },
+    {
+      "id": "S1",
+      "area": "storage",
+      "status": "pass",
+      "title": "privileged helper attached loop device and probed matching UUID",
+      "detail": {
+        "device": "/dev/loop0",
+        "uuid": "77b473f5-63cc-480d-b00a-6bbd99f98e10",
+        "type": "ext4"
+      }
+    },
+    {
+      "id": "S2",
+      "area": "storage",
+      "status": "pass",
+      "title": "unprivileged statfs identity check matches recorded UUID",
+      "detail": {
+        "ok": true,
+        "fsid": "4818bec71dc635fa",
+        "expected": "4818bec71dc635fa"
+      }
+    },
+    {
+      "id": "I0",
+      "area": "isolation",
+      "status": "pass",
+      "title": "world container starts with the hardened profile",
+      "detail": {
+        "stderr": ""
+      }
+    },
+    {
+      "id": "I1",
+      "area": "isolation",
+      "status": "pass",
+      "title": "inspect: unprivileged, read-only root, all capabilities dropped, no-new-privileges",
+      "detail": {
+        "user": "1000:1000",
+        "readonlyRootfs": true,
+        "privileged": false,
+        "capAdd": null,
+        "capDrop": [
+          "ALL"
+        ],
+        "securityOpt": [
+          "no-new-privileges"
+        ],
+        "networkMode": "none",
+        "portBindings": {},
+        "publishAllPorts": false,
+        "pidMode": "",
+        "ipcMode": "private",
+        "memory": 268435456,
+        "memorySwap": 268435456,
+        "nanoCpus": 500000000,
+        "pidsLimit": 64,
+        "ulimits": [
+          {
+            "Name": "nofile",
+            "Hard": 256,
+            "Soft": 256
+          }
+        ],
+        "tmpfs": {
+          "/tmp": "rw,nosuid,nodev,size=16m,mode=1777"
+        },
+        "shmSize": 8388608,
+        "logConfig": {
+          "Type": "none",
+          "Config": {}
+        },
+        "logPath": "",
+        "restartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "autoRemove": false,
+        "init": true,
+        "devices": [],
+        "binds": null,
+        "mounts": [
+          {
+            "type": "volume",
+            "name": "alife-p0-20260925161449-5d99-world",
+            "destination": "/world",
+            "rw": true,
+            "driver": "local"
+          }
+        ],
+        "appArmorProfile": ""
+      }
+    },
+    {
+      "id": "I2",
+      "area": "isolation",
+      "status": "pass",
+      "title": "inspect: network none, no published ports",
+      "detail": {}
+    },
+    {
+      "id": "I3",
+      "area": "isolation",
+      "status": "pass",
+      "title": "inspect: logging disabled (no log file), no restart policy, no auto-remove",
+      "detail": {
+        "log": {
+          "Type": "none",
+          "Config": {}
+        },
+        "logPath": "",
+        "restart": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        }
+      }
+    },
+    {
+      "id": "I4",
+      "area": "isolation",
+      "status": "pass",
+      "title": "inspect: /world is the only volume; no bind mounts or devices",
+      "detail": {
+        "mounts": [
+          {
+            "type": "volume",
+            "name": "alife-p0-20260925161449-5d99-world",
+            "destination": "/world",
+            "rw": true,
+            "driver": "local"
+          }
+        ]
+      }
+    },
+    {
+      "id": "I5",
+      "area": "isolation",
+      "status": "pass",
+      "title": "process runs as 1000:1000 without supplementary groups",
+      "detail": {
+        "uid": 1000,
+        "gid": 1000,
+        "groups": [
+          1000
+        ]
+      }
+    },
+    {
+      "id": "I6",
+      "area": "isolation",
+      "status": "pass",
+      "title": "empty capability sets, NoNewPrivs=1, seccomp filter mode",
+      "detail": {
+        "CapInh": "0000000000000000",
+        "CapPrm": "0000000000000000",
+        "CapEff": "0000000000000000",
+        "CapBnd": "0000000000000000",
+        "CapAmb": "0000000000000000",
+        "NoNewPrivs": "1",
+        "Seccomp": "2"
+      }
+    },
+    {
+      "id": "I7",
+      "area": "isolation",
+      "status": "pass",
+      "title": "file creation succeeds only in /world, /tmp, /dev/shm",
+      "detail": {
+        "create": {
+          "/probe": "EROFS",
+          "/etc/probe": "EROFS",
+          "/usr/probe": "EROFS",
+          "/var/probe": "EROFS",
+          "/var/tmp/probe": "EROFS",
+          "/root/probe": "EACCES",
+          "/run/probe": "EROFS",
+          "/dev/probe": "EACCES",
+          "/home/probe": "EROFS",
+          "/world/.probe": "ok",
+          "/tmp/.probe": "ok",
+          "/dev/shm/.probe": "ok",
+          "/dev/mqueue/probe": "ok"
+        }
+      }
+    },
+    {
+      "id": "I7a",
+      "area": "isolation",
+      "status": "warn",
+      "title": "/dev/mqueue is writable (POSIX message queues; bounded by RLIMIT_MSGQUEUE, lost on stop)",
+      "detail": {
+        "mqueue": "ok"
+      }
+    },
+    {
+      "id": "I8",
+      "area": "isolation",
+      "status": "pass",
+      "title": "cannot open /etc/hosts, resolv.conf, hostname, passwd, or pid 1 stdout for writing",
+      "detail": {
+        "/etc/hosts": "EACCES",
+        "/etc/resolv.conf": "EACCES",
+        "/etc/hostname": "EACCES",
+        "/etc/passwd": "EACCES"
+      }
+    },
+    {
+      "id": "I9",
+      "area": "isolation",
+      "status": "pass",
+      "title": "no writable paths outside /world, /tmp, /dev/shm except standard character devices",
+      "detail": {
+        "writable": [
+          "/dev/urandom",
+          "/dev/zero",
+          "/dev/tty",
+          "/dev/full",
+          "/dev/random",
+          "/dev/null",
+          "/dev/mqueue",
+          "/dev/pts/ptmx"
+        ]
+      }
+    },
+    {
+      "id": "I10",
+      "area": "isolation",
+      "status": "pass",
+      "title": "only loopback; outbound IPv4/IPv6 and DNS fail",
+      "detail": {
+        "interfaces": [
+          "lo"
+        ],
+        "connect": {
+          "1.1.1.1:443": "ENETUNREACH",
+          "192.168.138.1:22": "ENETUNREACH",
+          "[2606:4700:4700::1111]:443": "ENETUNREACH"
+        },
+        "dns": "gaierror"
+      }
+    },
+    {
+      "id": "I11",
+      "area": "isolation",
+      "status": "pass",
+      "title": "no Docker/containerd socket or loop devices visible",
+      "detail": {
+        "dev": [
+          "fd",
+          "full",
+          "mqueue",
+          "null",
+          "ptmx",
+          "pts",
+          "random",
+          "shm",
+          "stderr",
+          "stdin",
+          "stdout",
+          "tty",
+          "urandom",
+          "zero"
+        ]
+      }
+    },
+    {
+      "id": "I12",
+      "area": "isolation",
+      "status": "pass",
+      "title": "exec environment contains no inherited credentials",
+      "detail": {
+        "env": [
+          "HOME",
+          "HOSTNAME",
+          "LC_CTYPE",
+          "PATH"
+        ]
+      }
+    },
+    {
+      "id": "I13",
+      "area": "isolation",
+      "status": "pass",
+      "title": "cgroup memory/swap/pids/cpu and nofile limits visible as configured",
+      "detail": {
+        "cgroup": {
+          "memory.max": "268435456",
+          "memory.swap.max": "0",
+          "memory.high": "max",
+          "pids.max": "64",
+          "cpu.max": "50000 100000",
+          "io.max": ""
+        },
+        "nofile": [
+          256,
+          256
+        ]
+      }
+    },
+    {
+      "id": "I14",
+      "area": "isolation",
+      "status": "info",
+      "title": "writable mounts",
+      "detail": {
+        "tmp": {
+          "mountpoint": "/tmp",
+          "opts": "rw,nosuid,nodev,noexec,relatime",
+          "fstype": "tmpfs",
+          "source": "tmpfs",
+          "superopts": "rw,size=16384k"
+        },
+        "shm": {
+          "mountpoint": "/dev/shm",
+          "opts": "rw,nosuid,nodev,noexec,relatime",
+          "fstype": "tmpfs",
+          "source": "shm",
+          "superopts": "rw,size=8192k"
+        },
+        "world": {
+          "mountpoint": "/world",
+          "opts": "rw,nosuid,nodev,noatime",
+          "fstype": "ext4",
+          "source": "/dev/loop0",
+          "superopts": "rw"
+        },
+        "mqueue": {
+          "mountpoint": "/dev/mqueue",
+          "opts": "rw,nosuid,nodev,noexec,relatime",
+          "fstype": "mqueue",
+          "source": "mqueue",
+          "superopts": "rw"
+        }
+      }
+    },
+    {
+      "id": "I15",
+      "area": "resources",
+      "status": "pass",
+      "title": "/tmp writes stop at 16 MiB with ENOSPC",
+      "detail": {
+        "bytes": 16777216,
+        "out": "dd: error writing '/tmp/fill': No space left on device\n17+0 records in\n16+0 records out\n16777216 bytes (17 MB, 16 MiB) copied, 0.00236308 s, 7.1 GB/s\nexit=1\n16777216\n"
+      }
+    },
+    {
+      "id": "I16",
+      "area": "resources",
+      "status": "pass",
+      "title": "/dev/shm writes stop at 8 MiB with ENOSPC",
+      "detail": {
+        "bytes": 8388608,
+        "out": "dd: error writing '/dev/shm/fill': No space left on device\n9+0 records in\n8+0 records out\n8388608 bytes (8.4 MB, 8.0 MiB) copied, 0.00131104 s, 6.4 GB/s\nexit=1\n8388608\n"
+      }
+    },
+    {
+      "id": "I17",
+      "area": "resources",
+      "status": "pass",
+      "title": "400 MiB allocation is OOM-killed (exit 137); world keeps running",
+      "detail": {
+        "exit": 137,
+        "running": true,
+        "oomKilledFlag": true,
+        "events": "low 0\nhigh 0\nmax 95\noom 1\noom_kill 1\noom_group_kill 0\nsock_throttled 0"
+      }
+    },
+    {
+      "id": "I18",
+      "area": "resources",
+      "status": "pass",
+      "title": "fork stops below pids.max=64 with EAGAIN",
+      "detail": {
+        "forked": 61,
+        "errno": 11
+      }
+    },
+    {
+      "id": "I19",
+      "area": "resources",
+      "status": "pass",
+      "title": "open() stops at nofile=256 with EMFILE",
+      "detail": {
+        "opened": 253,
+        "error": "EMFILE"
+      }
+    },
+    {
+      "id": "I20",
+      "area": "resources",
+      "status": "pass",
+      "title": "two busy processes are throttled to ~0.5 CPU",
+      "detail": {
+        "wall_s": 3.068,
+        "cpu_s": 1.526,
+        "cpus": 0.497
+      }
+    },
+    {
+      "id": "I21",
+      "area": "resources",
+      "status": "pass",
+      "title": "container stdout cannot accumulate a host-side log",
+      "detail": {
+        "writeToPid1Stdout": "0",
+        "logs": "Error response from daemon: configured logging driver does not support reading"
+      }
+    },
+    {
+      "id": "S3",
+      "area": "storage",
+      "status": "pass",
+      "title": "agent-visible statfs is per-world: 120.2 MiB usable of 128 MiB requested, 4096 inodes",
+      "detail": {
+        "df": "4818bec71dc635fa 31469 31431 30776 4096 4096 4084\n/dev/loop0        125876   152    123104   1% /world\n/dev/loop0       4096    12  4084    1% /world"
+      }
+    },
+    {
+      "id": "S4",
+      "area": "storage",
+      "status": "pass",
+      "title": "block exhaustion returns ENOSPC after 120.0 MiB",
+      "detail": {
+        "tail": [
+          "125829120 bytes (126 MB, 120 MiB) copied, 0.105647 s, 1.2 GB/s",
+          "exit=1",
+          "125829120",
+          "56"
+        ]
+      }
+    },
+    {
+      "id": "S5",
+      "area": "storage",
+      "status": "pass",
+      "title": "backing image did not grow beyond requested size at exhaustion",
+      "detail": {
+        "apparentKiB": 131072,
+        "allocatedKiB": 127272
+      }
+    },
+    {
+      "id": "S6",
+      "area": "storage",
+      "status": "pass",
+      "title": "inode exhaustion returns ENOSPC after 4083 files",
+      "detail": {
+        "created": 4083,
+        "error": "ENOSPC",
+        "files_free_at_limit": 0,
+        "files_total": 4096
+      }
+    },
+    {
+      "id": "E1",
+      "area": "execution",
+      "status": "pass",
+      "title": "exec reports exit status and separate stdout/stderr",
+      "detail": {
+        "id": "dbb944cef7ddf0576b01aca173a3a19d97e42deb0470a60005a9001c88c388d4",
+        "exitCode": 7,
+        "running": false,
+        "stdout": "out\n",
+        "stderr": "err\n",
+        "total": {
+          "stdout": 4,
+          "stderr": 4
+        }
+      }
+    },
+    {
+      "id": "E2",
+      "area": "execution",
+      "status": "pass",
+      "title": "termination by signal is reported (128+SIGTERM)",
+      "detail": {
+        "exit": 143
+      }
+    },
+    {
+      "id": "E3",
+      "area": "execution",
+      "status": "pass",
+      "title": "fully redirected background process returns promptly and keeps running across later execs",
+      "detail": {
+        "returnMs": 18,
+        "lines": 4
+      }
+    },
+    {
+      "id": "E4",
+      "area": "execution",
+      "status": "pass",
+      "title": "inherited stdout does not hold the exec open for the descendant's lifetime (exit 2019 ms, stream stream-eof at 2018 ms)",
+      "detail": {
+        "exitMs": 2019,
+        "exitCode": 0,
+        "endedBy": "stream-eof",
+        "eofMs": 2018,
+        "totalMs": 2019,
+        "stdoutBytes": 8,
+        "stdoutHead": "started\n",
+        "sleep15Alive": "1"
+      }
+    },
+    {
+      "id": "E5",
+      "area": "execution",
+      "status": "info",
+      "title": "background writer on the inherited stdout died once the stream closed (EPIPE/SIGPIPE) (259/600 KiB written)",
+      "detail": {
+        "exitMs": 2016,
+        "exitCode": 0,
+        "endedBy": "stream-eof",
+        "eofMs": 2015,
+        "totalMs": 2016,
+        "stdoutBytes": 133128,
+        "stdoutHead": "started\n\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "count": 259,
+        "state": "gone"
+      }
+    },
+    {
+      "id": "E6",
+      "area": "execution",
+      "status": "pass",
+      "title": "closing the attach stream does NOT stop the command (exec keeps running)",
+      "detail": {
+        "running": true,
+        "pid": 5067
+      }
+    },
+    {
+      "id": "E7",
+      "area": "execution",
+      "status": "pass",
+      "title": "session kill ends the timed-out command and its ordinary children, but a setsid+env -i daemon escapes",
+      "detail": {
+        "term": {
+          "mode": "session",
+          "killed": [
+            [
+              802,
+              "sh"
+            ],
+            [
+              810,
+              "sleep"
+            ],
+            [
+              807,
+              "sleep"
+            ]
+          ],
+          "remaining": []
+        },
+        "running": false,
+        "exitCode": 137,
+        "survivors": "809 /bin/sleep 301",
+        "backgroundLoop": "alive"
+      }
+    },
+    {
+      "id": "E8",
+      "area": "execution",
+      "status": "pass",
+      "title": "tree kill (new processes not descended from pre-existing ones) also ends escaped daemons, sparing earlier background work",
+      "detail": {
+        "term": {
+          "mode": "tree",
+          "killed": [
+            [
+              850,
+              "sleep"
+            ],
+            [
+              853,
+              "sleep"
+            ],
+            [
+              845,
+              "sh"
+            ],
+            [
+              852,
+              "sleep"
+            ]
+          ],
+          "remaining": []
+        },
+        "running": false,
+        "exitCode": 137,
+        "survivors": "",
+        "backgroundLoop": "alive"
+      }
+    },
+    {
+      "id": "E9",
+      "area": "execution",
+      "status": "pass",
+      "title": "50 MB of output is streamed, counted, and truncated to the capture bound",
+      "detail": {
+        "totalStdout": 50000000,
+        "kept": 65536,
+        "ms": 75
+      }
+    },
+    {
+      "id": "P1",
+      "area": "persistence",
+      "status": "pass",
+      "title": "files and SQLite data survive container removal and recreation; processes do not",
+      "detail": {
+        "marker": true,
+        "sqlite": true,
+        "background": "bg-gone"
+      }
+    },
+    {
+      "id": "C1",
+      "area": "capture",
+      "status": "pass",
+      "title": "capture mounts the stopped world's filesystem read-only (EROFS on write)",
+      "detail": {
+        "mount": "/dev/loop0 /src ext4 ro,nosuid,nodev,noexec,noatime 0 0",
+        "running": false
+      }
+    },
+    {
+      "id": "C2",
+      "area": "capture",
+      "status": "pass",
+      "title": "bounded tar stream captured (20480 bytes, 13 entries, sha256 4e8c25703e29…)",
+      "detail": {
+        "stderr": ""
+      }
+    },
+    {
+      "id": "C3",
+      "area": "capture",
+      "status": "pass",
+      "title": "backing image is byte-identical before and after capture (no metadata writes)",
+      "detail": {
+        "before": "8b211e5396c993f1a146b7d77027e76d61d680604be070c18ae94190a3322a29",
+        "after": "8b211e5396c993f1a146b7d77027e76d61d680604be070c18ae94190a3322a29",
+        "mountCount": [
+          "5",
+          "5"
+        ]
+      }
+    },
+    {
+      "id": "C4",
+      "area": "capture",
+      "status": "pass",
+      "title": "links are archived as links (not followed), FIFOs as FIFOs, unreadable dirs via DAC_READ_SEARCH",
+      "detail": {
+        "abs": "lrwxrwxrwx  0 1000   1000        0 Sep 25 11:15 ./abs-link -> /etc/passwd",
+        "fifo": "prw-r--r--  0 1000   1000        0 Sep 25 11:15 ./fifo",
+        "sample": [
+          "lrwxrwxrwx  0 1000   1000        0 Sep 25 11:15 ./rel-link -> ../../../../etc",
+          "-rw-r--r--  0 1000   1000        1 Sep 25 11:15 ./esc\\033[31mname",
+          "d---------  0 1000   1000        0 Sep 25 11:15 ./deep/",
+          "drwxr-xr-x  0 1000   1000        0 Sep 25 11:15 ./deep/a/",
+          "drwxr-xr-x  0 1000   1000        0 Sep 25 11:15 ./deep/a/b/",
+          "drwxr-xr-x  0 1000   1000        0 Sep 25 11:15 ./deep/a/b/c/"
+        ]
+      }
+    },
+    {
+      "id": "C5",
+      "area": "capture",
+      "status": "info",
+      "title": "archive names can carry terminal control bytes; readers must escape them",
+      "detail": {
+        "escapedName": "\"-rw-r--r--  0 1000   1000        1 Sep 25 11:15 ./esc\\\\033[31mname\""
+      }
+    },
+    {
+      "id": "F1",
+      "area": "storage",
+      "status": "pass",
+      "title": "with the loop device detached, starting the world fails instead of using an unbounded directory",
+      "detail": {
+        "detached": [
+          "/dev/loop0"
+        ],
+        "stderr": "docker: Error response from daemon: failed to populate volume: error while mounting volume '/var/lib/docker/volumes/alife-p0-20260925161449-5d99-world/_data': failed to mount local volume: mount /dev/loop0:/var/lib/docker/volumes/alife-p0-20260925161449-5d99-world/_data, flags: 0x406: input/output e"
+      }
+    },
+    {
+      "id": "F2",
+      "area": "storage",
+      "status": "pass",
+      "title": "a stale device reference (/dev/loop0 now holds a decoy image) fails the identity check",
+      "detail": {
+        "ok": false,
+        "fsid": "bc50545070fc36a9",
+        "expected": "4818bec71dc635fa",
+        "volume": "alife-p0-20260925161449-5d99-world",
+        "decoyDevice": "/dev/loop0",
+        "originalDevice": "/dev/loop0"
+      }
+    },
+    {
+      "id": "F3",
+      "area": "storage",
+      "status": "pass",
+      "title": "a volume naming a nonexistent device fails to mount",
+      "detail": {
+        "stderr": "docker: Error response from daemon: error while mounting volume '/var/lib/docker/volumes/alife-p0-20260925161449-5d99-bogus/_data': failed to mount local volume: mount /dev/alife-missing:/var/lib/dock"
+      }
+    },
+    {
+      "id": "P-after detach",
+      "area": "persistence",
+      "status": "pass",
+      "title": "after detach: reattach (/dev/loop0), recreate device volume, identity verified, marker intact",
+      "detail": {
+        "attach": {
+          "device": "/dev/loop0",
+          "uuid": "77b473f5-63cc-480d-b00a-6bbd99f98e10",
+          "type": "ext4"
+        },
+        "identity": {
+          "ok": true,
+          "fsid": "4818bec71dc635fa",
+          "expected": "4818bec71dc635fa"
+        },
+        "fsState": "clean"
+      }
+    },
+    {
+      "id": "P3a",
+      "area": "persistence",
+      "status": "pass",
+      "title": "after OrbStack stop/start the world stays stopped (no auto-restart) and engine ID is stable",
+      "detail": {
+        "stop": 0,
+        "start": 0,
+        "state": {
+          "Status": "exited",
+          "ExitCode": 143
+        },
+        "idBefore": "ebf1ee81-aefd-482e-a2f4-80b1201cc57e",
+        "idAfter": "ebf1ee81-aefd-482e-a2f4-80b1201cc57e"
+      }
+    },
+    {
+      "id": "P3b",
+      "area": "persistence",
+      "status": "pass",
+      "title": "after restart the device volume fails closed until reattached",
+      "detail": {
+        "stderr": "docker: Error response from daemon: failed to populate volume: error while mounting volume '/var/lib/docker/volumes/alife-p0-20260925161449-5d99-world/_data': failed to mount local volume: mount /dev/",
+        "identity": {
+          "ok": false,
+          "reason": "mount-or-stat-failed",
+          "stderr": "docker: Error response from daemon: error while mounting volume '/var/lib/docker/volumes/alife-p0-20260925161449-5d99-world/_data': failed to mount local volume: mount /dev/loop0:/var/lib/docker/volumes/alife-p0-20260925161449-5d99-world/_data, flags: 0x406: input/output error\n\nRun 'docker run --help' for more information"
+        }
+      }
+    },
+    {
+      "id": "P3c",
+      "area": "persistence",
+      "status": "info",
+      "title": "filesystem state after restart: clean",
+      "detail": {
+        "features": "has_journal ext_attr resize_inode dir_index orphan_file filetype extent 64bit flex_bg metadata_csum_seed sparse_super large_file huge_file dir_nlink extra_isize metadata_csum"
+      }
+    },
+    {
+      "id": "P-after engine restart",
+      "area": "persistence",
+      "status": "pass",
+      "title": "after engine restart: reattach (/dev/loop0), recreate device volume, identity verified, marker intact",
+      "detail": {
+        "attach": {
+          "device": "/dev/loop0",
+          "uuid": "77b473f5-63cc-480d-b00a-6bbd99f98e10",
+          "type": "ext4"
+        },
+        "identity": {
+          "ok": true,
+          "fsid": "4818bec71dc635fa",
+          "expected": "4818bec71dc635fa"
+        },
+        "fsState": "clean"
+      }
+    },
+    {
+      "id": "P3d",
+      "area": "persistence",
+      "status": "pass",
+      "title": "data written before the restart persists; processes do not",
+      "detail": {
+        "out": "cd255d62ff929a4ee5d0ce45-restart bg-gone"
+      }
+    }
+  ],
+  "summary": {
+    "info": 7,
+    "pass": 50,
+    "warn": 1
+  },
+  "error": null
+}

@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "id": "empty-v1",
+  "status": "fixed",
+  "description": "No research-authored content. mkfs.ext4 creates lost+found (root-owned, mode 0700), which the agent can remove while it is empty; it is filesystem structure, not seed content.",
+  "entries": []
+}

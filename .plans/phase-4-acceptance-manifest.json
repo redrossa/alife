@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "frozenAt": "2026-09-27T01:20:02.645536+00:00",
+  "purpose": "Phase 4 fixed acceptance gate; changes require explicit contract review, not implementation convenience.",
+  "offline": {
+    "tests": 160,
+    "fixtureControlsPassed": 6,
+    "expectedRedFailures": 154,
+    "suites": 8,
+    "fullTests": 463,
+    "legacyTests": 303,
+    "targetedRepetitions": 3
+  },
+  "phase4Docker": {
+    "tests": 9,
+    "executed": false,
+    "requiresExplicitAuthorization": true
+  },
+  "files": [
+    {
+      "path": "runtime/test/integration/phase4.acceptance.test.ts",
+      "bytes": 34506,
+      "sha256": "9fbf119d58dcb794829f7a9568a384dee6563025507582448f6d6da9251fd288"
+    },
+    {
+      "path": "runtime/test/support/phase4-artifacts.ts",
+      "bytes": 10128,
+      "sha256": "f36f272a33401e073b9f8eec6db2042882ef3841dc3eac64d10f3b5d6273da26"
+    },
+    {
+      "path": "runtime/test/support/phase4-controller-child.ts",
+      "bytes": 2179,
+      "sha256": "b873bbe21eebc289157e5484dc8b2ebb842ace83617320a143a74b613df6215b"
+    },
+    {
+      "path": "runtime/test/support/phase4-managed-child.ts",
+      "bytes": 3121,
+      "sha256": "76ba139230d3a48298c2a30c606a441412fd8994c709acd3c9ea673eed0c5c22"
+    },
+    {
+      "path": "runtime/test/support/phase4-managed.ts",
+      "bytes": 14942,
+      "sha256": "f951ff3fd8ce6d898b5c1a0e7ab5f859d2f5d513a1d4b79000c83ca5703f7031"
+    },
+    {
+      "path": "runtime/test/support/phase4-watchdog.ts",
+      "bytes": 8545,
+      "sha256": "61088e167a40a510b30fbde9a2468011bb5133aa3b492383305a1b7c33e38437"
+    },
+    {
+      "path": "runtime/test/unit/phase4-artifacts.acceptance.test.ts",
+      "bytes": 29189,
+      "sha256": "829313802cae2776e5833874dd38126939f16431402549a7a130d6a2c6b39d79"
+    },
+    {
+      "path": "runtime/test/unit/phase4-control.acceptance.test.ts",
+      "bytes": 11793,
+      "sha256": "2cfc3dc2b32c76609d9176396f419a38bcb8f526d67a7cccbb1de25a8c17ca95"
+    },
+    {
+      "path": "runtime/test/unit/phase4-evidence.acceptance.test.ts",
+      "bytes": 11527,
+      "sha256": "62a2c8245d034360af01b3a9c6b2bd5ef13b77967fd2c7f1d3ca220f8cea3f10"
+    },
+    {
+      "path": "runtime/test/unit/phase4-managed.acceptance.test.ts",
+      "bytes": 16533,
+      "sha256": "b9a81df76eef81aa5e21f5c8d868917cb9e0942855d8e8a70cd5e27ef1cac3c7"
+    },
+    {
+      "path": "runtime/test/unit/phase4-resume.acceptance.test.ts",
+      "bytes": 24468,
+      "sha256": "7a7216570f466285706a205a63d21ade2c28b5f8471048e5694ebc186aaab9b5"
+    },
+    {
+      "path": "runtime/test/unit/phase4-watchdog-process.acceptance.test.ts",
+      "bytes": 11398,
+      "sha256": "04c86e80c702d5f91c26693d2c0545ca414f20a4cf8983a23b848cd40ae8fcbb"
+    },
+    {
+      "path": "runtime/test/unit/phase4-watchdog.acceptance.test.ts",
+      "bytes": 12859,
+      "sha256": "7bedd276526a73f5d95d1550685a937651de29a4aede2b083f40924af4692e41"
+    }
+  ],
+  "unchangedPhase3Gate": [
+    {
+      "path": "runtime/test/unit/signal-shutdown.acceptance.test.ts",
+      "sha256": "308a21ddd24928137036e05dcc616049152a416dbafa6e121a1f787e343545d1"
+    },
+    {
+      "path": "runtime/test/unit/epoch-restart.acceptance.test.ts",
+      "sha256": "9a31ffb70787a73d76e215520182c783bd454cc916bad454c25fed4693b9f709"
+    }
+  ]
+}

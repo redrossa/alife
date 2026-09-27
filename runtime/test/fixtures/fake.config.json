@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 2,
+  "world": {
+    "image": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "container": "restricted-container-v1",
+    "storage": {
+      "profile": "loop-ext4-volume-v1",
+      "helperImage": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "capacityMiB": 128,
+      "inodes": 4096,
+      "capture": "tar-capture-v1"
+    },
+    "memoryMiB": 256,
+    "swapMiB": 0,
+    "cpus": 0.5,
+    "pids": 64,
+    "fileDescriptors": 256,
+    "tmpMiB": 16,
+    "shmMiB": 8,
+    "network": "none",
+    "ipc": "private-no-mqueue-v1",
+    "logging": "none",
+    "uid": 1000,
+    "gid": 1000,
+    "seed": "empty-v1"
+  },
+  "body": {
+    "profile": "shell-body-v5",
+    "sensors": "baseline-sensors-v4",
+    "minimumTickIntervalMs": 1000,
+    "actionWaitMs": 10000,
+    "jobPolicy": "continuing-jobs-v4",
+    "maximumConcurrentJobs": 4,
+    "retainedFinishedJobs": 32,
+    "maximumCommandBytes": 8192,
+    "capturedOutputBytes": 65536,
+    "perceivedOutputBytes": 8192,
+    "outputTruncation": "head-v1",
+    "contextBudgetTokens": 32768,
+    "contextMarginTokens": 512,
+    "tokenEstimator": "utf8-bytes-v1",
+    "exposeContextUsage": true,
+    "contextPolicy": "recent-complete-exchanges-v2",
+    "prompt": "../../prompts/baseline.txt"
+  },
+  "mind": {
+    "provider": "fake",
+    "script": "fake-script.json",
+    "maximumOutputTokens": 1024,
+    "requestTimeoutMs": 60000,
+    "retryProfile": "none-v1"
+  },
+  "operator": {
+    "maximumTicks": 20,
+    "maximumRunSeconds": 1800,
+    "maximumEstimatedCostUsd": 0,
+    "recordLimitMiB": 1024,
+    "minimumHostFreeMiB": 2048,
+    "maximumConsecutiveProtocolErrors": 5,
+    "watchdogLeaseSeconds": 90,
+    "heartbeatIntervalSeconds": 15
+  }
+}
